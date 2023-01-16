@@ -148,6 +148,7 @@ namespace OOP__IV__Lab_7_WF
                 if (expression.IndexOf(number) > expression.IndexOf(" "))
                 {
                     expression = expression.Remove(expression.Length - 1);
+					number = number.Remove(number.Length - 1);
 
                     if (number.Length == 0)
                     {
