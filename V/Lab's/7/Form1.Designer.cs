@@ -228,7 +228,7 @@ namespace OOP__IV__Lab_7_WF
             this.b_hook.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_hook.ForeColor = System.Drawing.SystemColors.Control;
             this.b_hook.Location = new System.Drawing.Point(144, 112);
-            this.b_hook.Name = "b_hook";
+            this.b_hook.Name = "b_hookOpen";
             this.b_hook.Size = new System.Drawing.Size(27, 50);
             this.b_hook.TabIndex = 1;
             this.b_hook.TabStop = false;
@@ -553,7 +553,7 @@ namespace OOP__IV__Lab_7_WF
             this.button1.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.SystemColors.Control;
             this.button1.Location = new System.Drawing.Point(177, 112);
-            this.button1.Name = "button1";
+            this.button1.Name = "b_hookClose";
             this.button1.Size = new System.Drawing.Size(27, 50);
             this.button1.TabIndex = 1;
             this.button1.TabStop = false;
@@ -569,7 +569,7 @@ namespace OOP__IV__Lab_7_WF
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button2.Location = new System.Drawing.Point(276, 280);
-            this.button2.Name = "button2";
+            this.button2.Name = "b_exponentiation";
             this.button2.Size = new System.Drawing.Size(60, 50);
             this.button2.TabIndex = 1;
             this.button2.TabStop = false;
