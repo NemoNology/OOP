@@ -8,5 +8,5 @@
 ![image](https://user-images.githubusercontent.com/91414886/213414461-4fe571f4-9b9e-4b96-abcc-1605bb5afa68.png)
 ##
 ## Задание 7: Пример использования библиотеки с классом:
-![image1](https://github.com/NemoNology/OOP/blob/main/IV/Labs/1/Pictures/7.1.png)  
-![image2](https://github.com/NemoNology/OOP/blob/main/IV/Labs/1/Pictures/7.2.png)  
+![image](https://user-images.githubusercontent.com/91414886/213414917-82095a81-002c-412b-aeb8-838c8e355222.png)  
+![image](https://user-images.githubusercontent.com/91414886/213414983-2ceaf40c-6d88-4ce7-b89b-7f3945936507.png)
