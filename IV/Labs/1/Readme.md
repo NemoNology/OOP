@@ -1,4 +1,4 @@
-# Простой класс на Java или C#
+# Простой класс на Java или C# - Дата
 ## Полезные ссылки:
 [Коротко о классах в C# и Java](https://github.com/VetrovSV/OOP/blob/master/OOP_2.pdf)  
 [Создание диаграмм из plain text](https://plantuml.com/ru/)
