@@ -7,6 +7,9 @@
 ![image](https://user-images.githubusercontent.com/91414886/213414153-6642c45d-8c26-496e-a10e-3ce315ac376d.png)  
 ![image](https://user-images.githubusercontent.com/91414886/213414461-4fe571f4-9b9e-4b96-abcc-1605bb5afa68.png)
 ##
+## Задание 6: UML-диаграмма всего приложения:
+![image](https://user-images.githubusercontent.com/91414886/213621676-f4673c12-3189-42e4-94bd-1b937b5e7873.png)
+##
 ## Задание 7: Пример использования библиотеки с классом:
 ![image](https://user-images.githubusercontent.com/91414886/213618696-e8fe599e-11aa-4b2c-9cd2-3900af110261.png)
 ![image](https://user-images.githubusercontent.com/91414886/213620116-b77ba270-01be-4dab-bbaa-5d9e71c473fd.png)
