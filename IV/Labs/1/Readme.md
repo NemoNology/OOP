@@ -7,6 +7,13 @@
 ![image](https://user-images.githubusercontent.com/91414886/213414153-6642c45d-8c26-496e-a10e-3ce315ac376d.png)  
 ![image](https://user-images.githubusercontent.com/91414886/213414461-4fe571f4-9b9e-4b96-abcc-1605bb5afa68.png)
 ##
+## Задание 5: Пример использования класса:
+![image](https://user-images.githubusercontent.com/91414886/214025973-92127bef-67d4-4ba3-97ab-4ae748257129.png)  
+![image](https://user-images.githubusercontent.com/91414886/214026164-90b3d0d6-f5e1-4506-b24e-06e42459bf6f.png)  
+![image](https://user-images.githubusercontent.com/91414886/214026222-9de38726-8b48-4b7b-8696-ce18b1fab421.png)  
+![image](https://user-images.githubusercontent.com/91414886/214026318-4087e331-404b-4ede-95e7-261b9f581af7.png)  
+![image](https://user-images.githubusercontent.com/91414886/214026487-eacecfa7-a681-4c9e-9a84-cdf70d75bdd1.png)
+##
 ## Задание 6: UML-диаграмма всего приложения:
 ![image](https://user-images.githubusercontent.com/91414886/213803460-222ca432-1479-47ae-9e2b-934ea64cf606.png)
 ##
