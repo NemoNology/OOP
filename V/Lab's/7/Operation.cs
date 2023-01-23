@@ -4,13 +4,22 @@ namespace OOP__IV__Lab_7_WF
 {
     class Operation
     {
-        public static string[] priorities = { "+m", "*/", "sincostanlnexp", "^sqrt" };
+		/// <summary>
+		///	Priorities - array that include available operations
+		/// </summary>
+		public static string[] priorities = { "+m", "*/", "sincostanlnexp", "^sqrt" };
 
+		/// <summary>
+		/// OneOperandOperations - array that include available operations that needs only one operand
+		/// </summary>
 		public static string[] oneOperandOperations = { "sqrt", "sin", "cos", "tan", "ln", "exp" };
 
 		/// <summary>
-		/// O - Operand
+		/// 
+		///		Calculate two operands operation 
+		///		
 		/// </summary>
+		/// <value>  O - Operand  </value>
 		public static double Calculate(string operation, double O1, double O2)
         {
 			if (operation == "^")
@@ -42,9 +51,12 @@ namespace OOP__IV__Lab_7_WF
 		}
 
 		/// <summary>
-		/// O - Operand
+		/// 
+		///		Calculate one operands operation 
+		///		
 		/// </summary>
-		public static double Calculate(string operation, double O, bool IsDegree = false)
+		/// <value>  O - Operand  </value>
+		public static double Calculate(string operation, double O)
         {
 			if (operation == "sqrt")
 			{
@@ -59,12 +71,6 @@ namespace OOP__IV__Lab_7_WF
 			if (operation == "exp")
 			{
 				return Math.Exp(O);
-			}
-
-			// Converting in Degree
-			if (IsDegree)
-			{
-				O *= Math.Atan(1) / 45;
 			}
 
 			if (operation == "sin")
@@ -85,6 +91,17 @@ namespace OOP__IV__Lab_7_WF
 			return 0;
 		}
 
+		/// <summary>
+		///		
+		///		Check if it's one operand operation
+		/// 
+		/// </summary>
+		/// <returns>  
+		/// 
+		///		<c>  True  </c> - it's one operand operation <br/>
+        ///		<c>  False  </c> - otherside
+		/// 
+		/// </returns>
 		public static bool IsOneOperandOperation(string operation)
 		{
 			foreach(string s in oneOperandOperations)
@@ -98,6 +115,19 @@ namespace OOP__IV__Lab_7_WF
 			return false;
 		}
 
+		/// <summary>
+		/// 
+		///		Return Operation priority using priorities array
+		/// 
+		/// </summary>
+		/// <param name="operation"></param>
+		/// <returns>  
+		///	
+		///		<b> Operation priority, </b> starting with <b> 1 </b> <br/>
+		///		<b> 0 </b> - if opeartion was not found	
+		/// 
+		/// </returns>
+		/// <value>  Priorities array - array that include available operations  </value>
 		public static int GetOperationPriority(string operation)
 		{
 			for (int i = 0; i < priorities.Length; i++)

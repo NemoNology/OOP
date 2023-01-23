@@ -5,23 +5,44 @@ namespace OOP__IV__Lab_7_WF
 {
     class Calculator
     {
+        /// <summary>
+        /// Stack that keep all operations
+        /// </summary>
         private static Stack<string> operations = new Stack<string>();
+        /// <summary>
+        /// Stack that keep all operands
+        /// </summary>
         private static Stack<double> operands = new Stack<double>();
 
+        /// <summary>
+        /// Pop top operand from stack
+        /// </summary>
+        /// <returns> Poped operand (double) </returns>
         public static double PopOperand()
         {
             return operands.Pop();
         }
 
+        /// <summary>
+        /// Pop top operation from stack
+        /// </summary>
+        /// <returns> Poped operation (string) </returns>
         public static string PopOperation()
         {
             return operations.Pop();
         }
 
+        /// <summary>
+        /// Push operand to stack top
+        /// </summary>
         public static void Push(double element)
         {
             operands.Push(element);
         }
+
+        /// <summary>
+        /// Take top operation and top oprerand(s) and calclulate it with popping tokken operand(s) and operation
+        /// </summary>
         public static void Calculate()
         {
             if (operations.Peek() == "(")
@@ -40,6 +61,9 @@ namespace OOP__IV__Lab_7_WF
             }
         }
 
+        /// <summary>
+        /// Push operation to stack top <i> and calculating, if it's nessesary </i>
+        /// </summary>
         public static void Push(string element)
         {
             if (element == ")")
@@ -66,12 +90,10 @@ namespace OOP__IV__Lab_7_WF
             operations.Push(element);
         }
 
-        public static void ChangeTopOperandValue(double newValue)
-        {
-            operands.Pop();
-            operands.Push(newValue);
-        }
-
+        /// <summary>
+        /// Calculating while operations stack is not empty
+        /// </summary>
+        /// <returns>  Calculated result, that keeps in operands stack (at the top)  </returns>
         public static double GetAnswer()
         {
             while (operations.Count != 0)
@@ -82,6 +104,9 @@ namespace OOP__IV__Lab_7_WF
             return operands.Peek();
         }
 
+        /// <summary>
+        /// Clear operation and operands stacks
+        /// </summary>
         public static void Clear()
         {
             while (operations.Count != 0)
@@ -95,20 +120,33 @@ namespace OOP__IV__Lab_7_WF
             }
         }
 
-        public static double GetTopOperand()
+        /// <returns>  Operand at the stack top  </returns>
+        public static double TopOperand
         {
-            return operands.Peek();
+            get
+            {
+                return operands.Peek();
+            }
         }
 
-        public static string GetTopOperation()
+        /// <returns>  Operation at the stack top  </returns>
+        public static string TopOperation
         {
-            return operations.Peek();
+            get
+            {
+                return operations.Peek();
+            }
         }
 
-        // expression have to be seppareted with ' '
-        public static void SetExpression(string expression)
+        /// <summary>
+        /// 
+        ///     Load full expression to stacks
+        /// 
+        /// </summary>
+        /// <value>  <b> Inputed expression need to be separated with separator </b>  </value>  
+        public static void SetExpression(string expression, char separator = ' ')
         {
-            string[] buffer = expression.Trim(' ').Split(' ');
+            string[] buffer = expression.Trim(separator).Split(separator);
 
             Clear();
 

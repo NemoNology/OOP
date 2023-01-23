@@ -29,6 +29,7 @@ namespace OOP__IV__Lab_7_WF
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
@@ -61,6 +62,9 @@ namespace OOP__IV__Lab_7_WF
             this.previousExpression = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.status = new System.Windows.Forms.ToolStripStatusLabel();
+            this.Timer_5s = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,7 +73,9 @@ namespace OOP__IV__Lab_7_WF
             this.statusStrip1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("statusStrip1.BackgroundImage")));
             this.statusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripDropDownButton1});
+            this.toolStripDropDownButton1,
+            this.toolStripStatusLabel1,
+            this.status});
             this.statusStrip1.Location = new System.Drawing.Point(0, 389);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(348, 22);
@@ -228,7 +234,7 @@ namespace OOP__IV__Lab_7_WF
             this.b_hook.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_hook.ForeColor = System.Drawing.SystemColors.Control;
             this.b_hook.Location = new System.Drawing.Point(144, 112);
-            this.b_hook.Name = "b_hookOpen";
+            this.b_hook.Name = "b_hook";
             this.b_hook.Size = new System.Drawing.Size(27, 50);
             this.b_hook.TabIndex = 1;
             this.b_hook.TabStop = false;
@@ -553,7 +559,7 @@ namespace OOP__IV__Lab_7_WF
             this.button1.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.SystemColors.Control;
             this.button1.Location = new System.Drawing.Point(177, 112);
-            this.button1.Name = "b_hookClose";
+            this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(27, 50);
             this.button1.TabIndex = 1;
             this.button1.TabStop = false;
@@ -569,7 +575,7 @@ namespace OOP__IV__Lab_7_WF
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button2.Location = new System.Drawing.Point(276, 280);
-            this.button2.Name = "b_exponentiation";
+            this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(60, 50);
             this.button2.TabIndex = 1;
             this.button2.TabStop = false;
@@ -578,6 +584,25 @@ namespace OOP__IV__Lab_7_WF
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.ArithmeticFunction_Click);
             this.button2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Key_Down);
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.Control;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel1.Text = "|";
+            // 
+            // status
+            // 
+            this.status.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.status.ForeColor = System.Drawing.Color.Orange;
+            this.status.Name = "status";
+            this.status.Size = new System.Drawing.Size(0, 17);
+            // 
+            // Timer_5s
+            // 
+            this.Timer_5s.Interval = 5000;
+            this.Timer_5s.Tick += new System.EventHandler(this.ClearStatusMessage);
             // 
             // Form1
             // 
@@ -659,6 +684,9 @@ namespace OOP__IV__Lab_7_WF
         private System.Windows.Forms.ToolStripComboBox history;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel status;
+        private System.Windows.Forms.Timer Timer_5s;
     }
 }
 
