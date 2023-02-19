@@ -1,0 +1,64 @@
+﻿<Window x:Class="Tests.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tests" 
+        xmlns:view_models="clr-namespace:Tests.View_Models"
+        mc:Ignorable="d"
+        Title="Sign In"
+        Width="256"
+        Height="128"
+        ResizeMode="NoResize"
+        Icon="./Icons/bot.ico"
+        WindowStartupLocation="CenterScreen"
+        >
+
+    <Window.DataContext>
+
+        <view_models:ChatbotViewModel x:Name="chatbot"/>
+
+    </Window.DataContext>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+
+        <StackPanel 
+            
+            Grid.Row="0"
+            Orientation="Horizontal" 
+            Margin="10"
+            
+            >
+
+            <Label Content="Username:" VerticalAlignment="Center" FontWeight="Medium"/>
+
+            <TextBox 
+                
+                x:Name="inputName"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Width="150"
+                />
+
+        </StackPanel>
+
+        <Button 
+            
+            Grid.Row="1"
+            Margin="40,10"
+            Content="Sign In"
+            FontWeight="Medium" Click="ButtonSignIn_Click"
+            
+            />
+
+    </Grid>
+    
+    
+</Window>

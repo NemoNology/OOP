@@ -1,0 +1,204 @@
+﻿<Window x:Class="Tests.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tests" 
+        xmlns:view_models="clr-namespace:Tests.View_Models"
+        xmlns:extenders="clr-namespace:Tests.Models.Features"
+        mc:Ignorable="d"
+        Height="600" Width="800"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip"
+        Background="{StaticResource MainBackground}"
+        x:Name="ChatbotWindow"
+        Closed="ChatbotWindow_Closed"
+        Icon="./Icons/bot.ico" Loaded="MainWindow_Loaded"
+        
+        >
+
+    <Window.DataContext>
+
+        <view_models:ChatbotViewModel x:Name="chatbot"/>
+
+    </Window.DataContext>
+
+
+    <Grid>
+        
+
+        <!--#region Row Definition-->
+        
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="30"/>
+            <RowDefinition />
+            <RowDefinition Height="70"/>
+
+        </Grid.RowDefinitions>
+
+        <!--#endregion-->
+        
+
+        <!--#region Control/Title Panel-->
+        
+        <Border 
+            
+            Grid.ColumnSpan="1" Background="{StaticResource MainDark}"
+            MouseDown="Window_Drag"
+            
+            >
+
+            <Grid HorizontalAlignment="Stretch">
+
+                <!--#region Left (App name, author, icon)-->
+                
+                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+
+                    <Image Style="{StaticResource MainIcon}" Source="Icons/bot.ico" Height="20" Margin="8,0,5,0"/>
+                    <Label Content="Chat-Bot" Foreground="{StaticResource MainBright}" FontWeight="DemiBold" FontSize="14"/>
+                    <Label Style="{StaticResource AppAuthorLabel}"/>
+
+                </StackPanel>
+                
+                <!--#endregion-->
+
+                <!--#region App controls (Exit, Minimize, Winwod state)-->
+                
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,0,5,0">
+
+                    <!--#region Minimize button-->
+                    
+                    <Canvas Style="{StaticResource MenuButton}" MouseDown="ButtonMinimize_Click">
+
+                        <Label
+                            
+                            Style="{StaticResource MenuButtonLabel}"
+                            Content="_" FontSize="25" 
+                            Canvas.Bottom="-1"
+                            Canvas.Left="2"
+                            
+                            />
+
+                    </Canvas>
+
+                    <!--#endregion-->
+
+                    <!--#region Window state button-->
+                    
+                    <Canvas Style="{StaticResource MenuButton}" MouseDown="ButtonWindowState_Click" >
+
+                        <Label 
+                            
+                            Style="{StaticResource MenuButtonLabelMinimaze}"
+                            
+                            />
+
+
+                    </Canvas>
+
+                    <!--#endregion-->
+
+                    <!--#region Exit/Close button-->
+                    
+                    <Canvas Style="{StaticResource MenuButton}" MouseDown="ButtonClose_Click">
+
+                        <Label 
+                            
+                            Style="{StaticResource MenuButtonLabel}"
+                            Content="✕" FontSize="18"
+                            Canvas.Bottom="-4"
+                            
+                            />
+
+                    </Canvas>
+
+                    <!--#endregion-->
+                    
+                </StackPanel>
+                
+                <!--#endregion-->
+
+            </Grid>
+            
+        </Border>
+
+        <!--#endregion-->
+        
+
+        <!--#region Message Input -->
+        
+        <Grid HorizontalAlignment="Stretch" Grid.Row="2">
+
+            <!--#region Column Definition-->
+
+            <Grid.ColumnDefinitions>
+
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="1*"/>
+
+            </Grid.ColumnDefinitions>
+
+            <!--#endregion-->
+
+            <!--#region Message Box-->
+            
+            <TextBox 
+                
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Style="{StaticResource MessageBoxStyle}"
+                
+                />
+
+            <!--#endregion -->
+
+            <!--#region Message Input Button-->
+
+            <Border 
+                
+                Grid.Column="1" 
+                Style="{StaticResource MessageButtonBorder}"
+                HorizontalAlignment="Left"
+                MouseDown="ButtonSend_Click"
+                >
+
+                <Image
+
+                    Source="./Icons/send.ico"
+                    Style="{StaticResource MessageButtonImage}"
+
+                    />
+
+            </Border>
+
+            <!--#endregion -->
+
+        </Grid>
+
+        <!--#endregion-->
+        
+
+        <!--#region Messages-->
+
+        
+        <ListView 
+            
+            x:Name="MessagesView"
+            Grid.Row="1"
+            ItemsSource="{Binding Messages, Mode=OneWay}"
+            Style="{StaticResource MessagesStyle}"
+            ItemContainerStyle="{StaticResource MassageStyle}"
+            extenders:ListBoxExtenders.AutoScrollToEnd="True"
+            
+            />
+
+
+        <!--#endregion-->
+        
+
+    </Grid>
+    
+</Window>
