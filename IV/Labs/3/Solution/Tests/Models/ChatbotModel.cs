@@ -1,26 +1,28 @@
 ﻿using System.Collections.ObjectModel;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Tests.Models.ChatBot;
 
-using CB = Tests.Models.ChatBot.ChatBot;
 
 namespace Tests.Models
 {
     public class ChatbotModel
     {
 
-        private static User user = new User("Unknown");
+        private User user = new User("Unknown");
 
-        private static User chatbot = new User("ChatBot");
+        private User chatbot = new User("ChatBot");
 
-        public static string UserName => user.Name;
+        private ChatBot.ChatBot CB = new ChatBot.ChatBot();
+
+        public string UserName => user.Name;
 
         /// <summary>
         /// Return new message from current user from now with inputed content
         /// </summary>
         /// <param name="content"> Inputted message content </param>
         /// <returns></returns>
-        public static Message UserSendMessage(string content)
+        public Message UserSendMessage(string content)
         {
             return user.WriteMessage(content);
         }
@@ -30,7 +32,7 @@ namespace Tests.Models
         /// </summary>
         /// <param name="input"> Inputted request/question </param>
         /// <returns></returns>
-        public static Message ChatbotAnswer(string input)
+        public Message ChatbotAnswer(string input)
         {
             return chatbot.WriteMessage(CB.AnswerFunction(input));
         }
@@ -39,7 +41,7 @@ namespace Tests.Models
         /// Deserialize user (Messages, name) from binary file
         /// and put user messages to local messages
         /// </summary>
-        public static ObservableCollection<Message> LoadMessages()
+        public ObservableCollection<Message> LoadMessages()
         {
             ObservableCollection<Message> res = new ObservableCollection<Message>();
 
@@ -68,7 +70,7 @@ namespace Tests.Models
         /// Save local messages to user messages and
         /// serialize user (Messages, name) to binary file
         /// </summary>
-        public static void SaveMessages(ObservableCollection<Message> messages)
+        public void SaveMessages(ObservableCollection<Message> messages)
         {
             user.ClearMessages();
 
@@ -96,7 +98,7 @@ namespace Tests.Models
         /// Change current user name
         /// </summary>
         /// <param name="newName"> New current user name</param>
-        public static void ChangeUserName(string newName)
+        public void ChangeUserName(string newName)
         {
             user.Name = newName;
         }
