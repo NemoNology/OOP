@@ -56,6 +56,14 @@ namespace Tests.Models.ChatBot
 
 
         /// <summary>
+        /// Initialize a new ChatBot object with Initialization method
+        /// </summary>
+        public ChatBot()
+        {
+            this.Initialization();
+        }
+
+        /// <summary>
         /// Processing inputed request/message/question/command
         /// </summary>
         /// <param name="input">  Inputting request/message/question/command  </param>
