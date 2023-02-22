@@ -168,6 +168,8 @@ namespace Tests.Models.ChatBot
         /// <param name="expression"> Inputing math expression </param>
         public string Calculate(string expression)
         {
+            Calculator.Calculator Calc = new Calculator.Calculator();
+
             try
             {
                 Calc.SetExpression(expression);
