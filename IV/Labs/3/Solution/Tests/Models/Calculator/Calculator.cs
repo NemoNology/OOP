@@ -12,17 +12,17 @@ namespace Tests.Models.Calculator
         /// <summary>
         /// Stack that keep all operations
         /// </summary>
-        private static Stack<string> operations = new Stack<string>();
+        private Stack<string> operations = new Stack<string>();
         /// <summary>
         /// Stack that keep all operands
         /// </summary>
-        private static Stack<double> operands = new Stack<double>();
+        private Stack<double> operands = new Stack<double>();
 
         /// <summary>
         /// Pop top operand from stack
         /// </summary>
         /// <returns> Poped operand (double) </returns>
-        public static double PopOperand()
+        public double PopOperand()
         {
             return operands.Pop();
         }
@@ -31,7 +31,7 @@ namespace Tests.Models.Calculator
         /// Pop top operation from stack
         /// </summary>
         /// <returns> Poped operation (string) </returns>
-        public static string PopOperation()
+        public string PopOperation()
         {
             return operations.Pop();
         }
@@ -39,7 +39,7 @@ namespace Tests.Models.Calculator
         /// <summary>
         /// Push operand to stack top
         /// </summary>
-        public static void Push(double element)
+        public void Push(double element)
         {
             operands.Push(element);
         }
@@ -47,7 +47,7 @@ namespace Tests.Models.Calculator
         /// <summary>
         /// Take top operation and top oprerand(s) and calclulate it with popping tokken operand(s) and operation
         /// </summary>
-        public static void Calculate()
+        public void Calculate()
         {
             if (operations.Peek() == "(")
             {
@@ -68,7 +68,7 @@ namespace Tests.Models.Calculator
         /// <summary>
         /// Push operation to stack top <i> and calculating, if it's nessesary </i>
         /// </summary>
-        public static void Push(string element)
+        public void Push(string element)
         {
             if (element == ")")
             {
@@ -98,7 +98,7 @@ namespace Tests.Models.Calculator
         /// Calculating while operations stack is not empty
         /// </summary>
         /// <returns>  Calculated result, that keeps in operands stack (at the top)  </returns>
-        public static double GetAnswer()
+        public double GetAnswer()
         {
             while (operations.Count != 0)
             {
@@ -111,7 +111,7 @@ namespace Tests.Models.Calculator
         /// <summary>
         /// Clear operation and operands stacks
         /// </summary>
-        public static void Clear()
+        public void Clear()
         {
             while (operations.Count != 0)
             {
@@ -125,7 +125,7 @@ namespace Tests.Models.Calculator
         }
 
         /// <returns>  Operand at the stack top  </returns>
-        public static double TopOperand
+        public double TopOperand
         {
             get
             {
@@ -134,7 +134,7 @@ namespace Tests.Models.Calculator
         }
 
         /// <returns>  Operation at the stack top  </returns>
-        public static string TopOperation
+        public string TopOperation
         {
             get
             {
@@ -148,7 +148,7 @@ namespace Tests.Models.Calculator
         /// 
         /// </summary>
         /// <value>  <b> Inputed expression need to be separated with separator </b>  </value>  
-        public static void SetExpression(string expression, char separator = ' ')
+        public void SetExpression(string expression, char separator = ' ')
         {
             string[] buffer = expression.Trim(separator).Split(separator);
 
