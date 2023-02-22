@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Input;
 using Tests.Models;
 
@@ -13,6 +12,7 @@ namespace Tests.View_Models
 
         #region Fields & Properties
 
+        private ChatbotModel chatbotModel = new ChatbotModel();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -24,7 +24,7 @@ namespace Tests.View_Models
         /// <summary>
         /// Buffer messages (List of messages, that changed while processing with application)
         /// </summary>
-        private ObservableCollection<Message> messages = ChatbotModel.LoadMessages();
+        private ObservableCollection<Message> messages = new ObservableCollection<Message>();
 
 
         /// <summary>
@@ -53,12 +53,12 @@ namespace Tests.View_Models
         {
             get
             {
-                return ChatbotModel.UserName;
+                return chatbotModel.UserName;
             }
 
             set
             {
-                ChatbotModel.ChangeUserName(value);
+                chatbotModel.ChangeUserName(value);
             }
         }
 
@@ -73,6 +73,13 @@ namespace Tests.View_Models
 
         #region Methods
 
+        /// <summary>
+        /// Initialize a new ChatbotViewModel object with LoadMessages method
+        /// </summary>
+        public ChatbotViewModel()
+        {
+            messages = chatbotModel.LoadMessages(); 
+        }
 
         /// <summary>
         /// Save new message from current user 
@@ -84,11 +91,13 @@ namespace Tests.View_Models
                 return;
             }
 
-            Messages.Add(ChatbotModel.UserSendMessage(MessageContent));
+            Messages.Add(chatbotModel.UserSendMessage(MessageContent));
 
-            await Task.Delay(250);
+            // "await" - Async wait while Method will be completed
+            // In our case: async wait while process 250 ml sec
+            await Task.Delay(450);
 
-            UserGetMessage(ChatbotModel.ChatbotAnswer(MessageContent));
+            UserGetMessage(chatbotModel.ChatbotAnswer(MessageContent));
 
             MessageContent = string.Empty;
         }
@@ -106,7 +115,7 @@ namespace Tests.View_Models
         /// </summary>
         public void SaveMessages()
         {
-            ChatbotModel.SaveMessages(Messages);
+            chatbotModel.SaveMessages(Messages);
         }
 
         /// <summary>
@@ -114,7 +123,7 @@ namespace Tests.View_Models
         /// </summary>
         public void LoadMessages()
         {
-            messages = ChatbotModel.LoadMessages();
+            messages = chatbotModel.LoadMessages();
 
             PropertyChanged(this, new PropertyChangedEventArgs(nameof(Messages)));
         }
