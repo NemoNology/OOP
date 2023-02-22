@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Tests.Models.Features;
 
@@ -14,44 +15,32 @@ namespace Tests.Models.ChatBot
 
         #region Fields & Properties
 
-
-        private const uint _commansSize = 16;
-        private const uint _answersSize = 32;
-
+        private Answer answers = new Answer();
 
         /// <summary>
         /// Array of possible questions and answers on them
         /// </summary>
-        private static MyPair<string, Func<string>>[] _answers = new MyPair<string, Func<string>>[_answersSize];
+        private List<MyPair<string, Func<string>>> _answers = new List<MyPair<string, Func<string>>>();
 
         /// <summary>
         /// Array of possible commands (Request with input params) and answers on them
         /// </summary>
-        private static MyPair<string, Func<string, string>>[] _commands = new MyPair<string, Func<string, string>>[_commansSize];
-
-        /// <summary>
-        ///  Length of _answers
-        /// </summary>
-        private static int _answersLength = 0;
-        /// <summary>
-        /// Length of _commands
-        /// </summary>
-        private static int _commandsLength = 0;
+        private List<MyPair<string, Func<string, string>>> _commands = new List<MyPair<string, Func<string, string>>>();
 
 
         /// <summary>
         /// Return every available answer & command as function name
         /// </summary>
-        public static string Help()
+        public string Help()
         {
             string res = "List of available answers & commands (answers with input params):\n";
 
-            for (int i = 0; i < _answersLength; i++)
+            for (int i = 0; i < _answers.Count; i++)
             {
                 res += "-) " + _answers[i].Second.Method.Name + "\n";
             }
 
-            for (int i = 0; i < _commandsLength; i++)
+            for (int i = 0; i < _commands.Count; i++)
             {
                 res += "-) /" + _commands[i].Second.Method.Name + "\n";
             }
@@ -75,9 +64,9 @@ namespace Tests.Models.ChatBot
         /// Random nonunderstanding - otherside
         /// Exception message - if was thrown exception
         /// </returns>
-        public static string AnswerFunction(string input)
+        public string AnswerFunction(string input)
         {
-            for (int i = 0; i < _answersLength; i++)
+            for (int i = 0; i < _answers.Count; i++)
             {
                 if (Regex.Match(input, _answers[i].First, RegexOptions.IgnoreCase).Success)
                 {
@@ -85,7 +74,7 @@ namespace Tests.Models.ChatBot
                 }
             }
 
-            for (int i = 0; i < _commandsLength; i++)
+            for (int i = 0; i < _commands.Count; i++)
             {
                 if (Regex.Match(input, _commands[i].First, RegexOptions.IgnoreCase).Success)
                 {
@@ -100,7 +89,7 @@ namespace Tests.Models.ChatBot
                 }
             }
 
-            return Answer.UnknownRequest();
+            return answers.UnknownRequest();
         }
 
         /// <summary>
@@ -108,12 +97,9 @@ namespace Tests.Models.ChatBot
         /// </summary>
         /// <param name="regex"> Regular expression that is match to answer </param>
         /// <param name="answer"> Answer to to input (if regular expression is match) </param>
-        public static void AddAnswer(string regex, Func<string> answer)
+        public void AddAnswer(string regex, Func<string> answer)
         {
-            _answers[_answersLength].First = regex;
-            _answers[_answersLength].Second = answer;
-
-            _answersLength++;
+            _answers.Add(new MyPair<string, Func<string>>(regex, answer));
         }
 
         /// <summary>
@@ -121,29 +107,25 @@ namespace Tests.Models.ChatBot
         /// </summary>
         /// <param name="regex"> Regular expression that is match to command </param>
         /// <param name="answer"> Answer to to inputed command (if regular expression is match) </param>
-        public static void AddCommand(string regex, Func<string, string> answer)
+        public void AddCommand(string regex, Func<string, string> command)
         {
-            _commands[_commandsLength].First = regex;
-            _commands[_commandsLength].Second = answer;
-
-            _commandsLength++;
+            _commands.Add(new MyPair<string, Func<string, string>>(regex, command));
         }
-
 
 
         /// <summary>
         /// Adding to ChatBot every available answer and command
         /// </summary>
-        public static void Initialization()
+        public void Initialization()
         {
-            AddAnswer(@"^(hello|hola|hi|good (day|morning|athernoon|evening|night)|привет)+!*", Answer.Greeting);
-            AddAnswer(@"^(time|(((what('s| is))|how much)( the)? time( is( it)?)?)+( now)?)+\?*", Answer.Time);
-            AddAnswer(@"^(city|where am i)+\?*", Answer.City);
-            AddAnswer(@"^(weather|what('s| is) weather( now)?)+\?*", Answer.Weather);
-            AddAnswer(@"^(exchange rate(s)?)|((what('s| is)( the)? exchange rate(s)?( now| today)?)+\?*)", Answer.ExchangeRates);
-            AddAnswer(@"^(ip)|((what('s| is)( the)? my ip)+\?*)", Answer.IP);
-            AddCommand(@"^/+(search|find)( in (internet|browser))?", Answer.SearchInBrowser);
-            AddCommand(@"^/+(calculate|calc)", Answer.Calculate);
+            AddAnswer(@"^(hello|hola|hi|good (day|morning|athernoon|evening|night)|привет)+!*", answers.Greeting);
+            AddAnswer(@"^(time|(((what('s| is))|how much)( the)? time( is( it)?)?)+( now)?)+\?*", answers.Time);
+            AddAnswer(@"^(city|where am i)+\?*", answers.City);
+            AddAnswer(@"^(weather|what('s| is) weather( now)?)+\?*", answers.Weather);
+            AddAnswer(@"^(exchange rate(s)?)|((what('s| is)( the)? exchange rate(s)?( now| today)?)+\?*)", answers.ExchangeRates);
+            AddAnswer(@"^(ip)|((what('s| is)( the)? my ip)+\?*)", answers.IP);
+            AddCommand(@"^/+(search|find)( in (internet|browser))?", answers.SearchInBrowser);
+            AddCommand(@"^/+(calculate|calc)", answers.Calculate);
 
             AddAnswer(@"^(/)?help", Help);
         }
