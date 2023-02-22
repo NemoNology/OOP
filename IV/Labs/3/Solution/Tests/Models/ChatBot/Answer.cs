@@ -21,7 +21,7 @@ namespace Tests.Models.ChatBot
         ///     Return random greeting
         /// 
         /// </summary>
-        public static string Greeting()
+        public string Greeting()
         {
             string[] greetings = {
             "Hello",
@@ -38,7 +38,7 @@ namespace Tests.Models.ChatBot
         ///     Return current time
         /// 
         /// </summary>
-        public static string Time()
+        public string Time()
         {
             return DateTime.Now.ToString();
         }
@@ -48,7 +48,7 @@ namespace Tests.Models.ChatBot
         ///     Return city name
         /// 
         /// </summary>
-        public static string City()
+        public string City()
         {
             using (StreamReader sr = new StreamReader(WebRequest.Create("https://ipinfo.io/city?token=d74cbf82807257").GetResponse().GetResponseStream()))
             {
@@ -69,7 +69,7 @@ namespace Tests.Models.ChatBot
         /// </code>
         /// 
         /// </summary>
-        public static string Weather()
+        public string Weather()
         {
             string API_key = "580ff41b3ddf7ac053c01eec94985f50";
 
@@ -117,7 +117,7 @@ namespace Tests.Models.ChatBot
         ///     Returns a string with the exchange rate of the <b> dollar, euro </b>  and <b> hryvnia </b> against the <i> <b> ruble  </b> </i> 
         ///     
         /// </summary>
-        public static string ExchangeRates()
+        public string ExchangeRates()
         {
             XDocument xml = XDocument.Load("http://www.cbr.ru/scripts/XML_daily.asp");
 
@@ -134,7 +134,7 @@ namespace Tests.Models.ChatBot
         ///     Return IP user address
         /// 
         /// </summary>
-        public static string IP()
+        public string IP()
         {
             string temp;
 
@@ -154,7 +154,7 @@ namespace Tests.Models.ChatBot
         /// 
         /// </summary>
         /// <param name="searchInformation"> Inpiting search question/request </param>
-        public static string SearchInBrowser(string searchInformation)
+        public string SearchInBrowser(string searchInformation)
         {
             System.Diagnostics.Process.Start($"https://www.google.com/search?q={searchInformation.Replace(" ", "+")}");
             return "Opened";
@@ -166,7 +166,7 @@ namespace Tests.Models.ChatBot
         /// 
         /// </summary>
         /// <param name="expression"> Inputing math expression </param>
-        public static string Calculate(string expression)
+        public string Calculate(string expression)
         {
             try
             {
@@ -191,7 +191,7 @@ namespace Tests.Models.ChatBot
         /// <summary>
         /// Return random answer to unknown request
         /// </summary>
-        public static string UnknownRequest()
+        public string UnknownRequest()
         {
             string[] answers = {
                 "Please repeat, I didn't hear you",
