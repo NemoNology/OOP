@@ -15,7 +15,8 @@
         Background="{StaticResource MainBackground}"
         x:Name="ChatbotWindow"
         Closed="ChatbotWindow_Closed"
-        Icon="./Icons/bot.ico" Loaded="MainWindow_Loaded"
+        Icon="./Icons/bot.ico" 
+        
         
         >
 

@@ -11,7 +11,6 @@ namespace Tests
         public MainWindow()
         {
             InitializeComponent();
-            ChatBot.Initialization();
         }
 
         #region Control panel
@@ -65,10 +64,6 @@ namespace Tests
         {
             chatbot.UserSendMessage();
             MessagesView.ScrollIntoView(MessagesView.Items[MessagesView.Items.Count - 1]);
-        }
-
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        { 
         }
     }
 }
