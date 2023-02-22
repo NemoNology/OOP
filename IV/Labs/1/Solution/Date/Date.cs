@@ -26,7 +26,7 @@ namespace Date
     {
         // Year, month and day
         private int _year, _month, _day;
-        private static byte[] MonthWith30days = { 4, 6, 9, 11 };
+        private static byte[] MonthWith30days = { 3, 4, 8, 10 };
         private static string[] monthNames =
         {
             "Junuary", "February", "March", "April",
@@ -35,10 +35,7 @@ namespace Date
         };
 
         /// <summary>
-        /// 
-        ///     Year <br/>
-        ///     Value must be non-negative
-        /// 
+        /// Year <br/> Value must be non-negative
         /// </summary>
         public int Year
         {
@@ -47,7 +44,7 @@ namespace Date
             {
                 if (value < 0)
                 {
-                    throw new Exception("Inavalid argument: year value < 0");
+                    throw new Exception("Inavalid argument: inputed value less that zero (Not non-negative)");
                 }
                 else
                 {
@@ -57,11 +54,10 @@ namespace Date
         }
 
         /// <summary>
-        /// 
-        ///     ћес¤ц <br/>
-        ///     Value must be non-negative 
-        ///     and less than a 13
-        ///     
+        /// Month <br/>
+        /// Value must be <i> value from 0 to 11 - </i>  <c> Setting Month number <br/> </c>
+        /// Value must be <i> more than 11 - </i> <c> Months Adding <br/> </c> 
+        /// Value must be <i> less than 0 - </i> <c> Months Subtraction </c>
         /// </summary>
         public int Month
         {
@@ -69,23 +65,28 @@ namespace Date
 
             set
             {
-                if (value < 1 || value > 12)
+                if (value < 0 && _year == 0)
                 {
-                    throw new Exception("Invalid argument: mounth number < 1 or > 12");
+                    throw new Exception("Invalid argument: mounth value was less that zero and Years value is zero");
+                }
+                else if (value < 0)
+                {
+                    Year -= value / 12;
+                    _month = value % 12;
                 }
                 else
                 {
-                    _month = value;
+                    _year += value / 12;
+                    _month = value % 12;
                 }
             }
         }
 
         /// <summary>
-        /// 
-        ///     Day <br/>
-        ///     Value must be non-negative
-        ///     and less than days amount in month
-        ///     
+        /// Day <br/>
+        /// Value must be <i> value from 0 to Month Days Amount - </i>  <c> Setting Day number <br/> </c>
+        /// Value must be <i> more than Month Days Amount - </i> <c> Days Adding <br/> </c> 
+        /// Value must be <i> less than 0 - </i> <c> Days Subtraction </c>  
         /// </summary>
         public int Day
         {
@@ -93,12 +94,37 @@ namespace Date
 
             set
             {
-                if (value < 1 || value > DaysAmount)
+                if (value < 0 && _month == 0)
                 {
-                    throw new Exception("Invalid argument: Day value < 1 or > number of days in month");
+                    throw new Exception("Invalid argument: Day value was less that zero and Month value is zero");
+                }
+                else if (value < 0)
+                {
+                    while (value > DaysAmount - 1)
+                    {
+                        while (_day >= 0)
+                        {
+                            _day--;
+                            value--;
+                        }
+
+                        Month--;
+                        Day = DaysAmount - 1;
+                    }
+
+                    _day = value;
                 }
                 else
                 {
+                    value -= DaysAmount - 1 - _day;
+                    _day = 0;
+
+                    while (value > DaysAmount - 1)
+                    {
+                        value -= DaysAmount - 1;
+                        Month++;
+                    }
+                    
                     _day = value;
                 }
             }
@@ -125,7 +151,7 @@ namespace Date
         ///      Constructor
         ///     
         /// </summary>
-        public Date(int year = 0, int month = 1, int day = 1)
+        public Date(int year = 0, int month = 0, int day = 0)
         {
             Year = year;
             Month = month;
@@ -145,7 +171,7 @@ namespace Date
                 {
                     return 30;
                 }
-                else if (_month == 2)
+                else if (_month == 1)
                 {
                     if (YearLeapness)
                     {
@@ -173,7 +199,7 @@ namespace Date
         {
             get
             {
-                return monthNames[_month - 1];
+                return monthNames[_month];
             }
         }
 
@@ -185,7 +211,7 @@ namespace Date
         /// </summary>
         public static int GetMonthNumberByMonthName(string monthname)
         {
-            return Array.IndexOf(monthNames.Select(c => c.ToLower()).ToArray<string>(), monthname.ToLower()) + 1;
+            return Array.IndexOf(monthNames.Select(c => c.ToLower()).ToArray<string>(), monthname.ToLower());
         }
 
         /// <summary>
@@ -207,7 +233,91 @@ namespace Date
         /// </summary>
         public static string GetData(Date data)
         {
-            return $"Year: {data.Year} \tMonth: {data.MonthName} \tDay: {data.Day}";
+            return $"Year: {data._year} \tMonth: {data.MonthName} \tDay: {data._day + 1}";
         }
+        
+
+        #region Operators
+
+
+        public static Date operator + (Date d1, Date d2)
+        {
+            return new Date(d1.Year + d2.Year, d1.Month + d2.Month, d1.Day + d2.Day);
+        }
+
+        public static Date operator - (Date d1, Date d2)
+        {
+            return new Date(d1.Year - d2.Year, d1.Month - d2.Month, d1.Day - d2.Day);
+        }
+
+        public static Date operator ++ (Date date)
+        {
+            date.Day++;
+            return date;
+        }
+
+        public static Date operator -- (Date date)
+        {
+            date.Day--;
+            return date;
+        }
+
+        public static bool operator == (Date d1, Date d2)
+        {
+            return (d1._year == d2._year &&
+                d1._month == d2._month &&
+                d1._day == d2._day);
+        }
+
+        public static bool operator != (Date d1, Date d2)
+        {
+            return (d1._year != d2._year ||
+                d1._month != d2._month ||
+                d1._day != d2._day);
+        }
+
+        public static bool operator > (Date d1, Date d2)
+        {
+            return 
+                (d1._year > d2._year) ||
+                (d1._year == d2._year && d1._month > d2._month) ||
+                (d1._year == d2._year && d1._month == d2._month && d1._day > d2._day);
+        }
+
+        public static bool operator < (Date d1, Date d2)
+        {
+            return !(d1 > d2) && d1 != d2;
+        }
+
+        public static bool operator >= (Date d1, Date d2)
+        {
+            return !(d1 < d2);
+        }
+
+        public static bool operator <= (Date d1, Date d2)
+        {
+            return !(d1 > d2);
+        }
+
+        public static bool operator false (Date date)
+        {
+            return date == null ||
+                (date._year == 0 && 
+                date._month == 0 && 
+                date._day == 0);
+        }
+
+        public static bool operator true (Date date)
+        {
+            return 
+                date._year != 0 || 
+                date._month != 0 || 
+                date._day != 0;
+        }
+
+
+        #endregion
+
+
     }
 }
