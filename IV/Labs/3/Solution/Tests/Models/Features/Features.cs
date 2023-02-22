@@ -16,6 +16,13 @@ namespace Tests.Models.Features
     {
         public T First { get; set; }
         public U Second { get; set; }
+
+        public MyPair(T first, U second)
+        {
+            First = first;
+            Second = second;
+        }
+
     }
 
     /// <summary>
