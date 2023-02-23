@@ -115,7 +115,7 @@ namespace Date
                 }
                 else if (value < 0)
                 {
-                    _day += value;
+                    _day = value;
 
                     while (_day < 0)
                     {
@@ -131,7 +131,7 @@ namespace Date
                 }
                 else
                 {
-                    _day += value;
+                    _day = value;
 
                     while (_day > DaysAmount)
                     {
