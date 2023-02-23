@@ -152,6 +152,7 @@ namespace DateUnitTests
         /// <summary>
         /// Test Adding Year, Month and Day 
         /// </summary>
+        [TestMethod]
         public void TestOperatorAdding()
         {
             D.Year = 2023;
@@ -169,7 +170,45 @@ namespace DateUnitTests
             result.Month = 6;
             result.Year = 2024;
 
+            Assert.AreEqual(result, D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
 
+            result.Year = 2030;
+
+            D.Year += 6;
+
+            Assert.AreEqual(result, D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
+        }
+
+
+        /// <summary>
+        /// Test Substraction Year, Month and Day 
+        /// </summary>
+        [TestMethod]
+        public void TestOperatorSubstraction()
+        {
+            D.Year = 2030;
+            D.Month = 6;
+            D.Day = 31;
+
+            Date.Date result = new Date.Date(2024, 6, 31);
+
+            D.Year -= 6;
+
+            Assert.AreEqual(result, D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
+
+            result.Month = 2;
+            result.Year = 2023;
+
+            D.Month -= 17;
+
+            Assert.AreEqual(result, D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
+
+            D.Day -= 36;
+
+            result.Month = 1;
+            result.Day = 22;
+
+            Assert.AreEqual(result, D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
         }
 
     }
