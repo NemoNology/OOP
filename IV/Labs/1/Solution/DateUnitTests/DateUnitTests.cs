@@ -148,5 +148,29 @@ namespace DateUnitTests
                 Assert.IsInstanceOfType(exc, typeof(Exception), $"Expected Type: Exception; Actual Type: {exc.GetType()}");
             }
         }
+
+        /// <summary>
+        /// Test Adding Year, Month and Day 
+        /// </summary>
+        public void TestOperatorAdding()
+        {
+            D.Year = 2023;
+            D.Month = 1;
+            D.Day = 22;
+
+            D.Day += 36;
+
+            Date.Date result = new Date.Date(D.Year, 2, 31);
+
+            Assert.AreEqual(result, D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
+
+            D.Month += 17;
+
+            result.Month = 6;
+            result.Year = 2024;
+
+
+        }
+
     }
 }
