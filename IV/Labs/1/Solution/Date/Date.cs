@@ -232,9 +232,12 @@ namespace Date
         ///     </example> 
         ///     
         /// </summary>
-        public static string GetData(Date data)
+        public string DateInfo
         {
-            return $"Year: {data._year} \tMonth: {data.MonthName} \tDay: {data._day + 1}";
+            get
+            {
+                return $"Year: {_year} \tMonth: {MonthName} \tDay: {_day + 1}";
+            }
         }
         
 
