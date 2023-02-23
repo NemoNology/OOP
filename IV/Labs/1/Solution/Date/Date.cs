@@ -26,7 +26,7 @@ namespace Date
     {
         // Year, month and day
         private int _year, _month, _day;
-        private static byte[] MonthWith30days = { 3, 4, 8, 10 };
+        private static byte[] MonthWith30days = { 3, 5, 8, 10 };
         private static string[] monthNames =
         {
             "Junuary", "February", "March", "April",
@@ -66,10 +66,16 @@ namespace Date
 
             set
             {
+                if (value >= 0 && value < 12)
+                {
+                    _month = value;
+                    return;
+                }
+
                 int extraDays = _day;
                 _day = 0;
 
-                if (value < 0 && value > AllMonths)
+                if (AllMonths + value < 0)
                 {
                     throw new Exception("Invalid argument: mounth value was less that zero and Years value is zero");
                 }
@@ -100,21 +106,29 @@ namespace Date
 
             set
             {
-                int monthsAmount = 0;
-                _day = 0;
-
-                while (value > DaysAmount)
+                if (value >= 0 && value < DaysAmount)
                 {
-                    value -= DaysAmount;
-                    monthsAmount++;
+                    _day = value;
+                    return;
                 }
 
-                if (value < 0 && monthsAmount > AllMonths)
+                int extraDays = _day;
+                _day = 0;
+
+                if (AllDays + value < 0)
                 {
                     throw new Exception("Invalid argument: Day value was less that zero and Months value is not enough");
                 }
                 else if (value < 0)
                 {
+                    int monthsAmount = 0;
+
+                    while (value > DaysAmount)
+                    {
+                        monthsAmount++;
+                        value -= DaysAmount;
+                    }
+
                     _month -= monthsAmount;
                     
                     while (_month < 0)
@@ -139,6 +153,14 @@ namespace Date
                 }
                 else
                 {
+                    int monthsAmount = 0;
+
+                    while (value > DaysAmount)
+                    {
+                        monthsAmount++;
+                        value -= DaysAmount;
+                    }
+
                     _month += monthsAmount;
 
                     while (_month > 11)
@@ -235,6 +257,51 @@ namespace Date
             get
             {
                 return _year * 12 + _month;
+            }
+        }
+
+        /// <summary>
+        /// Return number of all days
+        /// </summary>
+        public uint AllDays
+        {
+            get
+            {
+                uint res = 0;
+
+                Date buffer = this.Copy();
+
+                while (buffer._year > 0)
+                {
+                    res += (uint)DaysAmountInYear;
+                    buffer._year--;
+                }
+
+                while (buffer._month > 0)
+                {
+                    res += (uint)DaysAmount;
+                    buffer._month--;
+                }
+
+                return res + (uint)buffer._day;
+            }
+        }
+
+        /// <summary>
+        /// Return number of days in a current year
+        /// </summary>
+        public int DaysAmountInYear
+        {
+            get
+            {
+                if (YearLeapness)
+                {
+                    return 366;
+                }
+                else
+                {
+                    return 365;
+                }
             }
         }
 
