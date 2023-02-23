@@ -72,9 +72,6 @@ namespace Date
                     return;
                 }
 
-                int extraDays = _day;
-                _day = 0;
-
                 if (AllMonths + value < 0)
                 {
                     throw new Exception("Invalid argument: mounth value was less that zero and Years value is zero");
@@ -90,7 +87,17 @@ namespace Date
                     _month = value % 12;
                 }
 
-                Day = _day + extraDays;
+                if (_day > DaysAmount)
+                {
+                    _month++;
+                    _day -= DaysAmount;
+
+                    if (_month > 11)
+                    {
+                        _year++;
+                        _month -= 11;
+                    }
+                }
             }
         }
 
@@ -112,12 +119,12 @@ namespace Date
                     return;
                 }
 
-                int extraDays = _day;
+                value += _day;
                 _day = 0;
 
                 if (AllDays + value < 0)
                 {
-                    throw new Exception("Invalid argument: Day value was less that zero and Months value is not enough");
+                    throw new Exception("Invalid argument: Day value was less that zero and All Days amount is not enough");
                 }
                 else if (value < 0)
                 {
@@ -145,7 +152,7 @@ namespace Date
                         if (_month > 11)
                         {
                             _year++;
-                            _month = 0;
+                            _month -= 11;
                         }
                     }
 
