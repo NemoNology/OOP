@@ -166,20 +166,31 @@ namespace DateUnitTests
 
             Date.Date result = new Date.Date(D.Year, 2, 30);
 
-            Assert.IsTrue(result == D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
+            Assert.IsTrue(result == D, $"Expected: {result.DateInfo};\nActual: {D.DateInfo}");
 
             D.Month += 17;
 
             result.Month = 7;
             result.Year = 2024;
 
-            Assert.IsTrue(result == D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
+            Assert.IsTrue(result == D, $"Expected: {result.DateInfo};\nActual: {D.DateInfo}");
 
             result.Year = 2030;
 
             D.Year += 6;
 
-            Assert.IsTrue(result == D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
+            Assert.IsTrue(result == D, $"Expected: {result.DateInfo};\nActual: {D.DateInfo}");
+
+            D.Day = 0;
+            D.Year = 2022;
+            D.Month = 11;
+            D.Month++;
+
+            result.Day = 0;
+            result.Year = 2023;
+            result.Month = 0;
+
+            Assert.IsTrue(result == D, $"Expected: {result.DateInfo};\nActual: {D.DateInfo}");
         }
 
 
@@ -197,21 +208,32 @@ namespace DateUnitTests
 
             Date.Date result = new Date.Date(2024, 7, 30);
 
-            Assert.IsTrue(result == D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
+            Assert.IsTrue(result == D, $"Expected: {result.DateInfo};\nActual: {D.DateInfo}");
 
             D.Month -= 17;
 
             result.Month = 2;
             result.Year = 2023;
 
-            Assert.IsTrue(result == D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
+            Assert.IsTrue(result == D, $"Expected: {result.DateInfo};\nActual: {D.DateInfo}");
 
             D.Day -= 36;
 
-            result.Month = 1;
             result.Day = 22;
+            result.Month = 1;
 
-            Assert.IsTrue(result == D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
+            Assert.IsTrue(result == D, $"Expected: {result.DateInfo};\nActual: {D.DateInfo}");
+
+            D.Day = 0;
+            D.Year = 2024;
+            D.Month = 0;
+            D.Month--;
+
+            result.Day = 0;
+            result.Year = 2023;
+            result.Month = 11;
+
+            Assert.IsTrue(result == D, $"Expected: {result.DateInfo};\nActual: {D.DateInfo}");
         }
 
     }
