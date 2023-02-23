@@ -66,45 +66,19 @@ namespace Date
 
             set
             {
-                if (value >= 0 && value < 12)
-                {
-                    _month = value;
-                }
-                else if (AllMonths + value < 0)
+                if (AllMonths + value < 0)
                 {
                     throw new Exception("Invalid argument: mounth value was less that zero and Years value is zero");
                 }
-                else if (value < 0)
+                else if (value < 12)
                 {
-                    value = Math.Abs(value);
+                    _month = value;
 
-
-                    //while (value > 0)
-                    //{
-                    //    _month--;
-                    //    value--;
-
-                    //    if (_month < 0)
-                    //    {
-                    //        _year--;
-                    //        _month = 11;
-                    //    }
-                    //}
-
-                    while (value > 11)
+                    while (_month < 0)
                     {
                         _year--;
-                        value -= 11;
+                        _month += 12;
                     }
-
-                    if (value > _month)
-                    {
-                        value -= _month;
-                        _month = 11;
-                        _year--;
-                    }
-
-                    _month -= value;
                 }
                 else
                 {
@@ -132,22 +106,18 @@ namespace Date
 
             set
             {
-                if (value >= 0 && value < DaysAmount)
-                {
-                    _day = value;
-                }
-                else if (AllDays + value < 0)
+                if (AllDays + value < 0)
                 {
                     throw new Exception("Invalid argument: Day value was less that zero and All Days amount is not enough");
                 }
-                else if (value < 0)
+                else if (value < DaysAmount)
                 {
                     _day = value;
 
                     while (_day < 0)
                     {
-                        _day += DaysAmount;
                         Month--;
+                        _day += DaysAmount;
                     }
 
                     if (_day > DaysAmount)
