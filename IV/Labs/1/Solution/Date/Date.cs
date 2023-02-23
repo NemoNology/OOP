@@ -121,31 +121,15 @@ namespace Date
                 }
                 else if (value < 0)
                 {
-                    int monthsAmount = 0;
-
                     while (value > DaysAmount)
                     {
-                        monthsAmount++;
-                        value -= DaysAmount;
-                    }
-
-                    _month -= monthsAmount;
-                    
-                    while (_month < 0)
-                    {
-                        _year--;
-                        _month += 11;
-                    }
-
-                    if (value > DaysAmount)
-                    {
-                        Month++;
+                        _month--;
                         value -= DaysAmount;
 
-                        if (_month > 11)
+                        if (_month < 0)
                         {
-                            _month -= 11;
-                            _year++;
+                            _year--;
+                            _month = 11;
                         }
                     }
 
@@ -153,31 +137,15 @@ namespace Date
                 }
                 else
                 {
-                    int monthsAmount = 0;
-
                     while (value > DaysAmount)
-                    {
-                        monthsAmount++;
-                        value -= DaysAmount;
-                    }
-
-                    _month += monthsAmount;
-
-                    while (_month > 11)
-                    {
-                        _month -= 11;
-                        _year++;
-                    }
-                    
-                    if (value > DaysAmount)
                     {
                         _month++;
                         value -= DaysAmount;
 
                         if (_month > 11)
                         {
-                            _month -= 11;
                             _year++;
+                            _month = 0;
                         }
                     }
 
