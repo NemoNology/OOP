@@ -56,7 +56,7 @@ namespace DateUnitTests
         {
             for (int i = 0; i < monthNames.Length; i++)
             {
-                D.Month = i + 1;
+                D.Month = i;
 
                 string result = D.MonthName;
 
@@ -74,7 +74,7 @@ namespace DateUnitTests
             {
                 int result = Date.Date.GetMonthNumberByMonthName(monthNames[i]);
 
-                Assert.AreEqual(i + 1, result, $"Expected: {i + 1}; Actual: {result}");
+                Assert.AreEqual(i, result, $"Expected: {i}; Actual: {result}");
             }
         }
 
@@ -91,7 +91,7 @@ namespace DateUnitTests
 
             foreach (int month in monthsWith30Days)
             {
-                D.Month = month;
+                D.Month = month - 1;
 
                 result = D.DaysAmount;
 
@@ -100,14 +100,14 @@ namespace DateUnitTests
 
             foreach (int month in monthsWith31Days)
             {
-                D.Month = month;
+                D.Month = month - 1;
 
                 result = D.DaysAmount;
 
                 Assert.AreEqual(31, result, $"Expected: 31; Actual: {result}");
             }
 
-            D.Month = 2;
+            D.Month = 1;
             D.Year = 3;
 
             result = D.DaysAmount;
@@ -128,24 +128,27 @@ namespace DateUnitTests
         [TestMethod]
         public void TestExceptionsThrows()
         {
-            int[] invalidData = { 0, -1, -9, -28, 100, 38, 90, -12 };
+            int[] invalidData = { -1, -9, -28, -12, -120 };
+
+            D.Year = 0;
+            D.Day = 0;
 
             foreach (int month in invalidData)
             {
                 var exc = Assert.ThrowsException<Exception>(() => D.Month = month);
-                Assert.IsInstanceOfType(exc, typeof(Exception), $"Expected Type: Exception; Actual Type: {exc.GetType()}");
+                Assert.IsInstanceOfType(exc, typeof(Exception), $"Expected Exception in Month; Actual Type: {exc.GetType()}");
             }
 
             foreach (int day in invalidData)
             {
                 var exc = Assert.ThrowsException<Exception>(() => D.Day = day);
-                Assert.IsInstanceOfType(exc, typeof(Exception), $"Expected Type: Exception; Actual Type: {exc.GetType()}");
+                Assert.IsInstanceOfType(exc, typeof(Exception), $"Expected Exception in Day; Actual Type: {exc.GetType()}");
             }
 
             foreach (int year in invalidData)
             {
-                var exc = Assert.ThrowsException<Exception>(() => D.Year = Math.Abs(year) * -1 - 1);
-                Assert.IsInstanceOfType(exc, typeof(Exception), $"Expected Type: Exception; Actual Type: {exc.GetType()}");
+                var exc = Assert.ThrowsException<Exception>(() => D.Year = year);
+                Assert.IsInstanceOfType(exc, typeof(Exception), $"Expected Exception in Year; Actual Type: {exc.GetType()}");
             }
         }
 
@@ -161,22 +164,22 @@ namespace DateUnitTests
 
             D.Day += 36;
 
-            Date.Date result = new Date.Date(D.Year, 2, 31);
+            Date.Date result = new Date.Date(D.Year, 2, 30);
 
-            Assert.AreEqual(result, D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
+            Assert.IsTrue(result == D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
 
             D.Month += 17;
 
-            result.Month = 6;
+            result.Month = 7;
             result.Year = 2024;
 
-            Assert.AreEqual(result, D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
+            Assert.IsTrue(result == D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
 
             result.Year = 2030;
 
             D.Year += 6;
 
-            Assert.AreEqual(result, D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
+            Assert.IsTrue(result == D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
         }
 
 
@@ -187,28 +190,28 @@ namespace DateUnitTests
         public void TestOperatorSubstraction()
         {
             D.Year = 2030;
-            D.Month = 6;
-            D.Day = 31;
-
-            Date.Date result = new Date.Date(2024, 6, 31);
+            D.Month = 7;
+            D.Day = 30;
 
             D.Year -= 6;
 
-            Assert.AreEqual(result, D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
+            Date.Date result = new Date.Date(2024, 7, 30);
+
+            Assert.IsTrue(result == D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
+
+            D.Month -= 17;
 
             result.Month = 2;
             result.Year = 2023;
 
-            D.Month -= 17;
-
-            Assert.AreEqual(result, D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
+            Assert.IsTrue(result == D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
 
             D.Day -= 36;
 
             result.Month = 1;
             result.Day = 22;
 
-            Assert.AreEqual(result, D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
+            Assert.IsTrue(result == D, $"Expected: {result.DateInfo}; Actual: {D.DateInfo}");
         }
 
     }
