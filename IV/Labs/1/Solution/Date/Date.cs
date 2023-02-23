@@ -76,8 +76,35 @@ namespace Date
                 }
                 else if (value < 0)
                 {
-                    _year -= value / 12;
-                    _month = value % 12;
+                    value = Math.Abs(value);
+
+
+                    //while (value > 0)
+                    //{
+                    //    _month--;
+                    //    value--;
+
+                    //    if (_month < 0)
+                    //    {
+                    //        _year--;
+                    //        _month = 11;
+                    //    }
+                    //}
+
+                    while (value > 11)
+                    {
+                        _year--;
+                        value -= 11;
+                    }
+
+                    if (value > _month)
+                    {
+                        value -= _month;
+                        _month = 11;
+                        _year--;
+                    }
+
+                    _month -= value;
                 }
                 else
                 {
