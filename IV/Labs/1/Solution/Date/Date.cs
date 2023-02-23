@@ -115,24 +115,48 @@ namespace Date
                 }
                 else if (value < 0)
                 {
-                    Month -= monthsAmount;
+                    _month -= monthsAmount;
                     
+                    while (_month < 0)
+                    {
+                        _year--;
+                        _month += 11;
+                    }
+
                     if (value > DaysAmount)
                     {
                         Month++;
                         value -= DaysAmount;
+
+                        if (_month > 11)
+                        {
+                            _month -= 11;
+                            _year++;
+                        }
                     }
 
-                    _day += value;
+                    _day = value;
                 }
                 else
                 {
-                    Month = _month + monthsAmount;
+                    _month += monthsAmount;
+
+                    while (_month > 11)
+                    {
+                        _month -= 11;
+                        _year++;
+                    }
                     
                     if (value > DaysAmount)
                     {
-                        Month++;
+                        _month++;
                         value -= DaysAmount;
+
+                        if (_month > 11)
+                        {
+                            _month -= 11;
+                            _year++;
+                        }
                     }
 
                     _day = value;
