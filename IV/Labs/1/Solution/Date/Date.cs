@@ -69,7 +69,7 @@ namespace Date
                 int extraDays = _day;
                 _day = 0;
 
-                if (value < 0 && value / 12 > _year)
+                if (value < 0 && value > AllMonths)
                 {
                     throw new Exception("Invalid argument: mounth value was less that zero and Years value is zero");
                 }
@@ -84,7 +84,7 @@ namespace Date
                     _month = value % 12;
                 }
 
-                Day += extraDays;
+                Day = _day + extraDays;
             }
         }
 
@@ -116,11 +116,18 @@ namespace Date
                 else if (value < 0)
                 {
                     Month -= monthsAmount;
-                    Day += value;
+                    
+                    if (value > DaysAmount)
+                    {
+                        Month++;
+                        value -= DaysAmount;
+                    }
+
+                    _day += value;
                 }
                 else
                 {
-                    Month += monthsAmount;
+                    Month = _month + monthsAmount;
                     
                     if (value > DaysAmount)
                     {
@@ -203,17 +210,7 @@ namespace Date
         {
             get
             {
-                Date buffer = this.Copy();
-
-                int counter = 0;
-
-                while (buffer._year > 0 && buffer._month > 0)
-                {
-                    buffer.Month--;
-                    counter++;
-                }
-
-                return counter;
+                return _year * 12 + _month;
             }
         }
 
