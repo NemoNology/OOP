@@ -222,21 +222,23 @@ namespace Date
             {
                 uint res = 0;
 
-                Date buffer = this.Copy();
+                int y = _year;
+                int m = _month;
+                int d = _day;
 
-                while (buffer._year > 0)
+                while (y > 0)
                 {
                     res += (uint)DaysAmountInYear;
-                    buffer._year--;
+                    y--;
                 }
 
-                while (buffer._month > 0)
+                while (m > 0)
                 {
                     res += (uint)DaysAmount;
-                    buffer._month--;
+                    m--;
                 }
 
-                return res + (uint)buffer._day;
+                return res + (uint)d;
             }
         }
 
