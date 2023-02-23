@@ -79,6 +79,12 @@ namespace Date
                 {
                     _year += value / 12;
                     _month = value % 12;
+                    
+                    if (_day > DaysAmount)
+                    {
+                        _day -= DaysAmount;
+                        _month++;
+                    }
                 }
             }
         }
