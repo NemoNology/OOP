@@ -40,6 +40,7 @@ namespace Date
         public int Year
         {
             get { return _year; }
+
             set
             {
                 if (value < 0)
@@ -65,13 +66,13 @@ namespace Date
 
             set
             {
-                if (value < 0 && _year == 0)
+                if (value < 0 && value / 12 > _year)
                 {
                     throw new Exception("Invalid argument: mounth value was less that zero and Years value is zero");
                 }
                 else if (value < 0)
                 {
-                    Year -= value / 12;
+                    _year -= value / 12;
                     _month = value % 12;
                 }
                 else
@@ -94,7 +95,7 @@ namespace Date
 
             set
             {
-                if (value < 0 && _month == 0)
+                if (value < 0 && value / 28 > _month)
                 {
                     throw new Exception("Invalid argument: Day value was less that zero and Month value is zero");
                 }
