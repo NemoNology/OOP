@@ -306,7 +306,7 @@ namespace Date
         {
             get
             {
-                return $"Year: {_year}\tMonth: {MonthName}\tDay: {_day + 1}";
+                return $"Year: {_year}  Month: {MonthName}  Day: {_day + 1}";
             }
         }
         
