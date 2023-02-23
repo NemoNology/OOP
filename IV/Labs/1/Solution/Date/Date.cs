@@ -66,6 +66,9 @@ namespace Date
 
             set
             {
+                int extraDays = _day;
+                _day = 0;
+
                 if (value < 0 && value / 12 > _year)
                 {
                     throw new Exception("Invalid argument: mounth value was less that zero and Years value is zero");
@@ -79,13 +82,9 @@ namespace Date
                 {
                     _year += value / 12;
                     _month = value % 12;
-                    
-                    if (_day > DaysAmount)
-                    {
-                        _day -= DaysAmount;
-                        _month++;
-                    }
                 }
+
+                Day += extraDays;
             }
         }
 
@@ -101,37 +100,34 @@ namespace Date
 
             set
             {
-                if (value < 0 && value / 28 > _month)
+                int monthsAmount = 0;
+                _day = 0;
+
+                while (value > DaysAmount)
                 {
-                    throw new Exception("Invalid argument: Day value was less that zero and Month value is zero");
+                    value -= DaysAmount;
+                    monthsAmount++;
+                }
+
+                if (value < 0 && monthsAmount > AllMonths)
+                {
+                    throw new Exception("Invalid argument: Day value was less that zero and Months value is not enough");
                 }
                 else if (value < 0)
                 {
-                    while (value > DaysAmount - 1)
-                    {
-                        while (_day >= 0)
-                        {
-                            _day--;
-                            value--;
-                        }
-
-                        Month--;
-                        Day = DaysAmount - 1;
-                    }
-
-                    _day = value;
+                    Month -= monthsAmount;
+                    Day += value;
                 }
                 else
                 {
-                    value -= DaysAmount - 1 - _day;
-                    _day = 0;
-
-                    while (value > DaysAmount - 1)
-                    {
-                        value -= DaysAmount - 1;
-                        Month++;
-                    }
+                    Month += monthsAmount;
                     
+                    if (value > DaysAmount)
+                    {
+                        Month++;
+                        value -= DaysAmount;
+                    }
+
                     _day = value;
                 }
             }
@@ -165,10 +161,13 @@ namespace Date
             Day = day;
         }
 
+        public Date Copy()
+        {
+            return new Date(_year, _month, _day);
+        }
+
         /// <summary>
-        ///  
-        ///     Return days amount in month
-        /// 
+        /// Return days amount in current month
         /// </summary>
         public int DaysAmount
         {
@@ -194,6 +193,27 @@ namespace Date
                     return 31;
                 }
 
+            }
+        }
+
+        /// <summary>
+        /// Return number of all months
+        /// </summary>
+        public int AllMonths
+        {
+            get
+            {
+                Date buffer = this.Copy();
+
+                int counter = 0;
+
+                while (buffer._year > 0 && buffer._month > 0)
+                {
+                    buffer.Month--;
+                    counter++;
+                }
+
+                return counter;
             }
         }
 
@@ -242,7 +262,7 @@ namespace Date
         {
             get
             {
-                return $"Year: {_year} \tMonth: {MonthName} \tDay: {_day + 1}";
+                return $"Year: {_year}\tMonth: {MonthName}\tDay: {_day + 1}";
             }
         }
         
