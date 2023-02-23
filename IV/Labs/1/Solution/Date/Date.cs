@@ -69,10 +69,8 @@ namespace Date
                 if (value >= 0 && value < 12)
                 {
                     _month = value;
-                    return;
                 }
-
-                if (AllMonths + value < 0)
+                else if (AllMonths + value < 0)
                 {
                     throw new Exception("Invalid argument: mounth value was less that zero and Years value is zero");
                 }
@@ -89,14 +87,8 @@ namespace Date
 
                 if (_day > DaysAmount)
                 {
-                    _month++;
                     _day -= DaysAmount;
-
-                    if (_month > 11)
-                    {
-                        _year++;
-                        _month -= 11;
-                    }
+                    Month++;
                 }
             }
         }
@@ -116,47 +108,36 @@ namespace Date
                 if (value >= 0 && value < DaysAmount)
                 {
                     _day = value;
-                    return;
                 }
-
-                value += _day;
-                _day = 0;
-
-                if (AllDays + value < 0)
+                else if (AllDays + value < 0)
                 {
                     throw new Exception("Invalid argument: Day value was less that zero and All Days amount is not enough");
                 }
                 else if (value < 0)
                 {
-                    while (value > DaysAmount)
-                    {
-                        _month--;
-                        value -= DaysAmount;
+                    _day += value;
 
-                        if (_month < 0)
-                        {
-                            _year--;
-                            _month = 11;
-                        }
+                    while (_day < 0)
+                    {
+                        _day += DaysAmount;
+                        Month--;
                     }
 
-                    _day = value;
+                    if (_day > DaysAmount)
+                    {   
+                        _day -= DaysAmount;
+                        Month++;
+                    }
                 }
                 else
                 {
-                    while (value > DaysAmount)
+                    _day += value;
+
+                    while (_day > DaysAmount)
                     {
-                        _month++;
-                        value -= DaysAmount;
-
-                        if (_month > 11)
-                        {
-                            _year++;
-                            _month -= 11;
-                        }
+                        _day -= DaysAmount;
+                        Month++;
                     }
-
-                    _day = value;
                 }
             }
         }
