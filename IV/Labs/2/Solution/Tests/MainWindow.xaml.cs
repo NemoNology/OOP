@@ -42,9 +42,7 @@ namespace Tests
         }
 
         /// <summary>
-        /// 
-        ///     Window closing 
-        /// 
+        /// Window closing 
         /// </summary>
         private void ButtonClose_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
