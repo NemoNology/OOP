@@ -22,6 +22,19 @@
             <Setter Property="FontSize" Value="14"/>
 
         </Style>
+
+        <Style x:Key="UsualTextBox" TargetType="TextBox">
+
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#578b61"/>
+            <Setter Property="Foreground" Value="#1a1a1a"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Padding" Value="5, 10"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="MinWidth" Value="250"/>
+
+        </Style>
         
     </Window.Resources>
     
@@ -30,12 +43,47 @@
         <Grid.RowDefinitions>
 
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
 
         </Grid.RowDefinitions>
 
-        <Grid Background="#1a1a1a">
+        <Menu
+            
+            Background="#1a1a1a"
+            >
+
+            <MenuItem 
+                
+                Header="File"
+                Background="#264837"
+                Foreground="White"
+                Padding="10,2"
+                FontWeight="Bold"
+                >
+
+                <MenuItem 
+                    
+                    Header="Save"
+                    Background="#438160"
+                    />
+                
+                <MenuItem 
+                    
+                    Header="Load"
+                    Background="#438160"
+                    />
+
+            </MenuItem>
+
+        </Menu>
+
+        <Grid 
+            
+            Grid.Row="1"
+            Background="#1a1a1a" 
+            >
 
             <Grid.ColumnDefinitions>
 
@@ -50,6 +98,22 @@
                     
                     Content="Add new Line"
                     Style="{StaticResource UsualButton}"
+                    
+                    />
+
+            </StackPanel>
+
+            <StackPanel 
+                
+                Grid.Column="1" 
+                Orientation="Horizontal"
+                HorizontalAlignment="Right"
+                >
+
+                <TextBox 
+                    
+                    x:Name="inputSearch"
+                    Style="{StaticResource UsualTextBox}"
                     
                     />
 
