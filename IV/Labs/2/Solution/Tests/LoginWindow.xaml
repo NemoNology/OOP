@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Sign In"
         Width="256"
-        Height="128"
+        Height="156"
         ResizeMode="NoResize"
         Icon="./Icons/bot.ico"
         WindowStartupLocation="CenterScreen"
@@ -24,27 +24,45 @@
 
         <Grid.RowDefinitions>
 
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
 
         </Grid.RowDefinitions>
 
         <StackPanel 
-            
-            Grid.Row="0"
-            Orientation="Horizontal" 
-            Margin="10"
-            
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
             >
 
-            <Label Content="Username:" VerticalAlignment="Center" FontWeight="Medium"/>
+            <StackPanel 
+            
+                Grid.Row="0"
+                Orientation="Horizontal" 
+                Margin="10"
+            
+                >
 
-            <TextBox 
+                <Label Content="Username:" VerticalAlignment="Center" FontWeight="Medium"/>
+
+                <TextBox 
                 
-                x:Name="inputName"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Right"
-                Width="150"
+                    x:Name="inputName"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Width="150"
+                    />
+
+            </StackPanel>
+
+            <Label 
+                
+                x:Name="status"
+                HorizontalAlignment="Center"
+                Foreground="Gray"
+                FontStyle="Italic"
+                Content=""
+                FontSize="10"
+                Margin="-5"
                 />
 
         </StackPanel>

@@ -17,13 +17,9 @@ namespace Tests
         {
             MainWindow mainWindow = new MainWindow();
 
-            try
+            if (string.IsNullOrEmpty(inputName.Text))
             {
-                mainWindow.chatbot.UserName = inputName.Text;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                status.Content = "Username can't be empty";
                 return;
             }
 
