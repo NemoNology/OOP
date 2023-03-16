@@ -128,6 +128,46 @@
             
         </Grid>
 
+        <Grid 
+            
+            Grid.Row="3"
+            Background="#1a1a1a"
+            
+            >
+
+            <StackPanel
+            
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                >
+
+                <TextBox 
+                
+                    Style="{StaticResource UsualTextBox}"
+                    />
+
+                <Button
+                    
+                    Style="{StaticResource UsualButton}"
+                    Content="Change Value"
+                    />
+
+            </StackPanel>
+
+            <Button 
+                
+                HorizontalAlignment="Right"
+                Style="{StaticResource UsualButton}"
+                Content="Delete Selected Line"
+                
+                />
+
+        </Grid>
+
+        <ListView
+            
+            Grid.Row="2"
+            />
 
     </Grid>
     
