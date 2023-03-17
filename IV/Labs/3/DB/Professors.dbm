@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,0" last-zoom="1" max-obj-count="4"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="1270,499" last-zoom="2.95" max-obj-count="4"
 	 default-schema="public" default-owner="postgres">
 <database name="Professor" is-template="false" allow-conns="true">
 	<comment><![CDATA[Table for proffessor]]></comment>
@@ -12,7 +12,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <schema name="public" layer="0" fill-color="#e1e1e1" sql-disabled="true">
 </schema>
 
-<table name="Professor" layer="0" collapse-mode="1" max-obj-count="9" z-value="0">
+<table name="Professor" layer="0" collapse-mode="1" max-obj-count="7" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Маленька БД "Преподователь
@@ -49,16 +49,6 @@ Sex]]></comment>
 		<type name="text" length="0"/>
 		<comment><![CDATA[Учёная степень 
 Academic degree]]></comment>
-	</column>
-	<column name="Post" not-null="true">
-		<type name="text" length="0"/>
-		<comment><![CDATA[Должность
-Post]]></comment>
-	</column>
-	<column name="Work experience">
-		<type name="int4" length="0"/>
-		<comment><![CDATA[Стаж работы
-Work experience]]></comment>
 	</column>
 	<constraint name="Professor_pk" type="pk-constr" table="public.&quot;Professor&quot;">
 		<columns names="ID" ref-type="src-columns"/>
