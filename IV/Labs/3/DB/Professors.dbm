@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,0" last-zoom="1" max-obj-count="4"
+	 default-schema="public" default-owner="postgres">
+<database name="Professor" is-template="false" allow-conns="true">
+	<comment><![CDATA[Table for proffessor]]></comment>
+</database>
+
+<schema name="public" layer="0" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="Professor" layer="0" collapse-mode="1" max-obj-count="9" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<comment><![CDATA[Маленька БД "Преподователь
+Small DB "Professor"]]></comment>
+	<position x="580" y="240"/>
+	<column name="ID" not-null="true"
+	 identity-type="ALWAYS">
+		<type name="int4" length="0"/>
+		<comment><![CDATA[Идентификационный номер/Ключ
+ID
+]]></comment>
+	</column>
+	<column name="First name" not-null="true">
+		<type name="text" length="0"/>
+		<comment><![CDATA[Имя
+First name]]></comment>
+	</column>
+	<column name="Second name" not-null="true">
+		<type name="text" length="0"/>
+		<comment><![CDATA[Фамилия
+Second name]]></comment>
+	</column>
+	<column name="Age" not-null="true">
+		<type name="smallint" length="0"/>
+		<comment><![CDATA[Возраст
+Age]]></comment>
+	</column>
+	<column name="Sex">
+		<type name="bool" length="0"/>
+		<comment><![CDATA[Пол
+Sex]]></comment>
+	</column>
+	<column name="Academic degree" not-null="true">
+		<type name="text" length="0"/>
+		<comment><![CDATA[Учёная степень 
+Academic degree]]></comment>
+	</column>
+	<column name="Post" not-null="true">
+		<type name="text" length="0"/>
+		<comment><![CDATA[Должность
+Post]]></comment>
+	</column>
+	<column name="Work experience">
+		<type name="int4" length="0"/>
+		<comment><![CDATA[Стаж работы
+Work experience]]></comment>
+	</column>
+	<constraint name="Professor_pk" type="pk-constr" table="public.&quot;Professor&quot;">
+		<columns names="ID" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+</dbmodel>
