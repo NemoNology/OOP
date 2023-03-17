@@ -1,5 +1,6 @@
 ﻿using Npgsql;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace WPF
 {
@@ -56,7 +57,7 @@ namespace WPF
 
         public void DBtoMainView()
         {
-            var command = Command("SELECT * FROM Professors");
+            var command = Command("SELECT * FROM Professors;");
             var er = command.ExecuteReader();
 
             if (er == null)
@@ -64,6 +65,8 @@ namespace WPF
 
             if (er.HasRows)
             {
+                Professors.Clear();
+
                 while (er.Read())
                 {
                     Professors.Add(
@@ -77,7 +80,28 @@ namespace WPF
                             ));
                 }
             }
-            
+        }
+
+        public void DeleteLine(int id)
+        {
+            var command = Command($"DELETE FROM Professors * WHERE ID = {id};");
+
+            Professors.Remove(Professors.First(x => x.ID == id));
+        }
+
+
+        public void UpdateLine(int id, string column, dynamic newValue)
+        {
+            var command = Command($"UPDATE Professors SET {column} = {newValue} WHERE ID = {id};");
+
+            DBtoMainView();
+        }
+
+        public void InsertLine(string newLine)
+        {
+            var command = Command($"INSERT INTO Professors VALUES ({newLine});");
+
+            DBtoMainView();
         }
     }
 }
