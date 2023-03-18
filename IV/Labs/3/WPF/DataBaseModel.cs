@@ -139,13 +139,12 @@ namespace WPF
                             er.GetString(1),
                             er.GetString(2),
                             er.GetInt16(3),
-                            er.GetBoolean(4),
-                            er.GetString(5)
+                            er.GetBoolean(4)
                             ));
                 }
-
-                Connection.Close();
             }
+
+            Connection.Close();
         }
 
         public void DeleteLine(int id)
@@ -155,7 +154,7 @@ namespace WPF
             Professors.Remove(Professors.First(x => x.ID == id));
         }
 
-        public void UpdateLine(int id, int newID, string newFirstName, string newSecondName, short newAge, bool newSex, string newAcademinDegree)
+        public void UpdateLine(int id, int newID, string newFirstName, string newSecondName, short newAge, bool newSex)
         {
             var columnsNames = ColumnsNames;
 
@@ -166,8 +165,7 @@ namespace WPF
                 $"SET \"{columnsNames[1]}\" = '{newFirstName}'," +
                 $"SET \"{columnsNames[2]}\" = '{newSecondName}'" +
                 $"SET \"{columnsNames[3]}\" = {newAge}," +
-                $"SET \"{columnsNames[4]}\" = '{sex}'," +
-                $"SET \"{columnsNames[5]}\" = '{newAcademinDegree}' " +
+                $"SET \"{columnsNames[4]}\" = '{sex}'" +
                 $"WHERE \"ID\" = {id};");
 
             command.ExecuteNonQuery();
