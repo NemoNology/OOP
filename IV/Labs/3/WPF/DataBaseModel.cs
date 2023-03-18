@@ -41,7 +41,7 @@ namespace WPF
             }
         }
 
-        public NpgsqlCommand Command(string postgressSQLCommand)
+        public NpgsqlCommand Command(string postgressSQLCommand, bool NeedToKeepOpenConnection = false)
         {
             NpgsqlCommand command = new NpgsqlCommand();
 
@@ -49,6 +49,11 @@ namespace WPF
 
             command.Connection = Connection;
             command.CommandText = postgressSQLCommand;
+
+            if (NeedToKeepOpenConnection)
+            {
+                Connection.Close();
+            }
 
             return command;
         }
@@ -68,6 +73,7 @@ namespace WPF
                 {
                     MessageBox.Show($"There is no table wich name is {tableName}",
                         "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    Connection.Close();
                     return tableNames;
                 }
 
@@ -102,9 +108,9 @@ namespace WPF
             }
         }
 
-        public void DBtoMainView()
+        public void UpdateProfessors()
         {
-            var command = Command("SELECT * FROM Professors;");
+            var command = Command("SELECT * FROM professor ORDER BY ID;");
             var er = command.ExecuteReader();
 
             if (er == null)
@@ -136,27 +142,34 @@ namespace WPF
 
         public void DeleteLine(int id)
         {
-            var command = Command($"DELETE FROM Professors * WHERE ID = {id};");
-
-            Connection.Close();
+            Command($"DELETE FROM Professors * WHERE ID = {id};");
 
             Professors.Remove(Professors.First(x => x.ID == id));
         }
 
-        public void UpdateLine(int id, string column, dynamic newValue)
+        public void UpdateLine(int id, int newID, string newFirstName, string newSecondName, short newAge, bool newSex, string newAcademinDegree)
         {
-            var command = Command($"UPDATE Professors SET {column} = {newValue} WHERE ID = {id};");
-            Connection.Close();
+            var columnsNames = ColumnsNames;
 
-            DBtoMainView();
+            var sex = newSex ? 1 : 0;
+
+            Command($"UPDATE Professors " +
+                $"SET {columnsNames[0]} = {newID}, " +
+                $"SET {columnsNames[1]} = '{newFirstName}'," +
+                $"SET {columnsNames[2]} = '{newSecondName}'" +
+                $"SET {columnsNames[3]} = {newAge}," +
+                $"SET {columnsNames[4]} = '{sex}'," +
+                $"SET {columnsNames[5]} = '{newAcademinDegree}' " +
+                $"WHERE ID = {id};");
+
+            UpdateProfessors();
         }
 
         public void InsertLine(string newLine)
         {
-            var command = Command($"INSERT INTO Professors VALUES ({newLine});");
-            Connection.Close();
+            Command($"INSERT INTO Professors VALUES ({newLine});");
 
-            DBtoMainView();
+            UpdateProfessors();
         }
     }
 }
