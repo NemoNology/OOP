@@ -18,6 +18,11 @@ namespace WPF
 
         private NpgsqlConnection? _connection;
 
+        public DataBaseModel()
+        {
+            UpdateProfessors();
+        }
+
         public string ConnectionStringConfig
         {
             get
@@ -156,21 +161,25 @@ namespace WPF
 
             var sex = newSex ? 1 : 0;
 
-            Command($"UPDATE Professors " +
+            var command = Command($"UPDATE professor " +
                 $"SET \"{columnsNames[0]}\" = {newID}, " +
                 $"SET \"{columnsNames[1]}\" = '{newFirstName}'," +
                 $"SET \"{columnsNames[2]}\" = '{newSecondName}'" +
                 $"SET \"{columnsNames[3]}\" = {newAge}," +
                 $"SET \"{columnsNames[4]}\" = '{sex}'," +
                 $"SET \"{columnsNames[5]}\" = '{newAcademinDegree}' " +
-                $"WHERE ID = {id};");
+                $"WHERE \"ID\" = {id};");
+
+            command.ExecuteNonQuery();
 
             UpdateProfessors();
         }
 
         public void InsertLine(string newLine)
         {
-            Command($"INSERT INTO Professors VALUES ({newLine});");
+            var command = Command($"INSERT INTO professor VALUES ({newLine});");
+
+            command.ExecuteNonQuery();
 
             UpdateProfessors();
         }
