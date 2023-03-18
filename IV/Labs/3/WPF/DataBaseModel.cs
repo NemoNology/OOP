@@ -113,8 +113,6 @@ namespace WPF
 
         public void UpdateProfessors()
         {
-            var test = ColumnsNames;
-
             var command = Command("SELECT * FROM professor ORDER BY \"ID\";");
             var er = command.ExecuteReader();
 
