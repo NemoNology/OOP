@@ -55,28 +55,16 @@ namespace WPF
             }
         }
         public bool Sex { get; set; }
-        public string AcademicDegree
-        {
-            get { return _academicDegree; }
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                    throw new ArgumentNullException(nameof(AcademicDegree));
-
-                _academicDegree = value;
-            }
-        }
 
         public Professor(int iD, string firstName,
             string secondtName, short age,
-            bool sex, string academicDegree)
+            bool sex)
         {
             ID = iD;
             FirstName = firstName;
             SecondtName = secondtName;
             Age = age;
             Sex = sex;
-            AcademicDegree = academicDegree;
         }
     }
 }
