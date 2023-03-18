@@ -13,14 +13,7 @@ namespace WPF
         {
             InitializeComponent();
 
-            if (_db.Professors.Count != 0)
-            {
-                inputID.Text = (_db.Professors.Max(x => x.ID) + 1).ToString();
-            }
-            else
-            {
-                inputID.Text = "0";
-            }
+            RefreshID();
         }
 
         DataBaseModel _db = new DataBaseModel();
@@ -48,7 +41,41 @@ namespace WPF
 
             data.ItemsSource = _db.Professors;
 
-            inputID.Text = (_db.Professors.Max( x => x.ID ) + 1).ToString();
+            RefreshID();
+        }
+
+        private void DB_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (data.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            Professor chosenProfessor = data.Items[data.SelectedIndex] as Professor;
+
+            inputID.Text = chosenProfessor.ID.ToString();
+            inputFName.Text = chosenProfessor.FirstName;
+            inputSName.Text = chosenProfessor.SecondtName;
+            inputAge.Text = chosenProfessor.Age.ToString();
+        }
+
+        private void DeleteSelectedLine_Click(object sender, RoutedEventArgs e)
+        {
+            if (data.Items.Count == 0 || data.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            var currentSelectedIndex = data.SelectedIndex;
+
+            Professor chosenProfessor = data.Items[currentSelectedIndex] as Professor;
+
+            _db.DeleteLine(chosenProfessor.ID);
+
+            data.ItemsSource = _db.Professors;
+
+            data.SelectedIndex = currentSelectedIndex - 1;
+            RefreshID();
         }
 
         private bool IsValidInput
@@ -92,21 +119,23 @@ namespace WPF
         {
             foreach (var item in _db.Professors)
             {
-                if (item.ID == id) 
+                if (item.ID == id)
                     return false;
             }
 
             return true;
         }
 
-        private void DB_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void RefreshID()
         {
-            Professor chosenProfessor = data.Items[data.SelectedIndex] as Professor;
-
-            inputID.Text = chosenProfessor.ID.ToString();
-            inputFName.Text = chosenProfessor.FirstName;
-            inputSName.Text = chosenProfessor.SecondtName;
-            inputAge.Text = chosenProfessor.Age.ToString();
+            if (_db.Professors.Count != 0)
+            {
+                inputID.Text = (_db.Professors.Max(x => x.ID) + 1).ToString();
+            }
+            else
+            {
+                inputID.Text = "0";
+            }
         }
     }
 }

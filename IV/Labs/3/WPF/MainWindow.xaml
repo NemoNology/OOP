@@ -222,7 +222,8 @@
                     <Button HorizontalAlignment="Right"
                             Style="{StaticResource UsualButton}"
                             Content="Delete Selected Line"
-                            Padding="5" />
+                            Padding="5"
+                            Click="DeleteSelectedLine_Click" />
 
                 </StackPanel>
 
