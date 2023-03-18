@@ -15,7 +15,7 @@ namespace WPF
         public string UserID { get; set; } = "postgres";
         public string Password { get; set; } = "123";
         public string DatabaseName { get; set; } = "postgres";
-        public ObservableCollection<Professor> Professors { get; } new ObservableCollection<Professor>();
+        public ObservableCollection<Professor> Professors { get; } = new ObservableCollection<Professor>();
 
         private NpgsqlConnection? _connection;
 
@@ -130,11 +130,11 @@ namespace WPF
 
             if (er.HasRows)
             {
-                _professors.Clear();
+                Professors.Clear();
 
                 while (er.Read())
                 {
-                    _professors.Add(
+                    Professors.Add(
                         new Professor(
                             er.GetInt32(0),
                             er.GetString(1),
@@ -150,9 +150,11 @@ namespace WPF
 
         public void DeleteLine(int id)
         {
-            Command($"DELETE FROM Professors * WHERE \"ID\" = {id};");
+            var command = Command($"DELETE FROM professor * WHERE \"ID\" = {id};");
 
-            _professors.Remove(_professors.First(x => x.ID == id));
+            command.ExecuteNonQuery();
+
+            Professors.Remove(Professors.First(x => x.ID == id));
         }
 
         public void UpdateLine(int id, int newID, string newFirstName, string newSecondName, short newAge, bool newSex)
