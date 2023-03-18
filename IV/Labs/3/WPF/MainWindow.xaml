@@ -217,7 +217,8 @@
                             Click="AddNewLine_Click" />
 
                     <Button Style="{StaticResource UsualButton}"
-                            Content="Update Line" />
+                            Content="Update Selected Line"
+                            Click="UpdateLine_Click" />
 
                     <Button HorizontalAlignment="Right"
                             Style="{StaticResource UsualButton}"

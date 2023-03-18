@@ -33,7 +33,7 @@ namespace WPF
                 return;
             }
 
-            var age = Convert.ToInt32(inputAge.Text);
+            var age = Convert.ToInt16(inputAge.Text);
 
             bool sex = inputSex.SelectedIndex == 1;
 
@@ -44,24 +44,9 @@ namespace WPF
             RefreshID();
         }
 
-        private void DB_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            if (data.SelectedIndex == -1)
-            {
-                return;
-            }
-
-            Professor chosenProfessor = data.Items[data.SelectedIndex] as Professor;
-
-            inputID.Text = chosenProfessor.ID.ToString();
-            inputFName.Text = chosenProfessor.FirstName;
-            inputSName.Text = chosenProfessor.SecondtName;
-            inputAge.Text = chosenProfessor.Age.ToString();
-        }
-
         private void DeleteSelectedLine_Click(object sender, RoutedEventArgs e)
         {
-            if (data.Items.Count == 0 || data.SelectedIndex == -1)
+            if (data.Items.Count == 0 || data.SelectedIndex < 0)
             {
                 return;
             }
@@ -77,6 +62,35 @@ namespace WPF
             data.SelectedIndex = currentSelectedIndex - 1;
             RefreshID();
         }
+
+        private void UpdateLine_Click(object sender, RoutedEventArgs e)
+        {
+            if (!IsValidInput || data.SelectedIndex < 0)
+            {
+                return;
+            }
+
+            var newID = Convert.ToInt32(inputID.Text);
+            var ID = (data.Items[data.SelectedIndex] as Professor).ID;
+
+            if (!IsIDUnique(newID, true, ID))
+            {
+                return;
+            }
+
+            var age = Convert.ToInt16(inputAge.Text);
+            bool sex = inputSex.SelectedIndex == 1;
+
+            _db.UpdateLine(ID, newID, inputFName.Text, inputSName.Text, age, sex);
+
+            data.ItemsSource = _db.Professors;
+            RefreshID();
+        }
+
+        
+
+
+        #region Features
 
         private bool IsValidInput
         {
@@ -115,15 +129,33 @@ namespace WPF
             }
         }
 
-        private bool IsIDUnique(int id)
+        private bool IsIDUnique(int id, bool IsCountSelectedID = false, int selectedID = 0)
         {
             foreach (var item in _db.Professors)
             {
-                if (item.ID == id)
+                if (item.ID == id && !(IsCountSelectedID && item.ID == selectedID))
+                {
+                    status.Content = "New ID value must be unique";
                     return false;
+                }
             }
 
             return true;
+        }
+
+        private void DB_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (data.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            Professor chosenProfessor = data.Items[data.SelectedIndex] as Professor;
+
+            inputID.Text = chosenProfessor.ID.ToString();
+            inputFName.Text = chosenProfessor.FirstName;
+            inputSName.Text = chosenProfessor.SecondtName;
+            inputAge.Text = chosenProfessor.Age.ToString();
         }
 
         private void RefreshID()
@@ -137,5 +169,7 @@ namespace WPF
                 inputID.Text = "0";
             }
         }
+
+        #endregion
     }
 }
