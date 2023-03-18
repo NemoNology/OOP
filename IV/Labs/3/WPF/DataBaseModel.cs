@@ -45,7 +45,10 @@ namespace WPF
         {
             NpgsqlCommand command = new NpgsqlCommand();
 
-            Connection.Open();
+            if (Connection.State == System.Data.ConnectionState.Closed)
+            {
+                Connection.Open();
+            }
 
             command.Connection = Connection;
             command.CommandText = postgressSQLCommand;
@@ -110,7 +113,9 @@ namespace WPF
 
         public void UpdateProfessors()
         {
-            var command = Command("SELECT * FROM professor ORDER BY ID;");
+            var test = ColumnsNames;
+
+            var command = Command("SELECT * FROM professor ORDER BY \"ID\";");
             var er = command.ExecuteReader();
 
             if (er == null)
@@ -142,7 +147,7 @@ namespace WPF
 
         public void DeleteLine(int id)
         {
-            Command($"DELETE FROM Professors * WHERE ID = {id};");
+            Command($"DELETE FROM Professors * WHERE \"ID\" = {id};");
 
             Professors.Remove(Professors.First(x => x.ID == id));
         }
@@ -154,12 +159,12 @@ namespace WPF
             var sex = newSex ? 1 : 0;
 
             Command($"UPDATE Professors " +
-                $"SET {columnsNames[0]} = {newID}, " +
-                $"SET {columnsNames[1]} = '{newFirstName}'," +
-                $"SET {columnsNames[2]} = '{newSecondName}'" +
-                $"SET {columnsNames[3]} = {newAge}," +
-                $"SET {columnsNames[4]} = '{sex}'," +
-                $"SET {columnsNames[5]} = '{newAcademinDegree}' " +
+                $"SET \"{columnsNames[0]}\" = {newID}, " +
+                $"SET \"{columnsNames[1]}\" = '{newFirstName}'," +
+                $"SET \"{columnsNames[2]}\" = '{newSecondName}'" +
+                $"SET \"{columnsNames[3]}\" = {newAge}," +
+                $"SET \"{columnsNames[4]}\" = '{sex}'," +
+                $"SET \"{columnsNames[5]}\" = '{newAcademinDegree}' " +
                 $"WHERE ID = {id};");
 
             UpdateProfessors();
