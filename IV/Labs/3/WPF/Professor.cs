@@ -21,7 +21,7 @@ namespace WPF
                 _id = value;
             }
         }
-        public string FirstName 
+        public string FirstName
         {
             get { return _firstName; }
             set
@@ -32,7 +32,7 @@ namespace WPF
                 _firstName = value;
             }
         }
-        public string SecondtName 
+        public string SecondtName
         {
             get { return _secondName; }
             set
@@ -67,8 +67,8 @@ namespace WPF
             }
         }
 
-        public Professor(int iD, string firstName, 
-            string secondtName, short age, 
+        public Professor(int iD, string firstName,
+            string secondtName, short age,
             bool sex, string academicDegree)
         {
             ID = iD;
