@@ -11,5 +11,7 @@ namespace WPF
         {
             InitializeComponent();
         }
+
+        DataBaseModel _db = new DataBaseModel();
     }
 }

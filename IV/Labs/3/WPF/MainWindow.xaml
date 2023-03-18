@@ -6,9 +6,15 @@
         xmlns:local="clr-namespace:WPF"
         mc:Ignorable="d"
         Title="Simple DB Controller" 
-        Height="450" Width="800"
+        Height="450" Width="auto"
         WindowStartupLocation="CenterScreen"
         >
+
+    <Window.DataContext>
+
+        <local:DataBaseModel x:Name="DBModel"/>
+
+    </Window.DataContext>
 
     <Window.Resources>
 
@@ -32,16 +38,37 @@
             <Setter Property="Padding" Value="5, 10"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="MinWidth" Value="250"/>
+            <Setter Property="MinWidth" Value="150"/>
 
         </Style>
 
-        <Style x:Key="DataBaseListBox" TargetType="ListBox">
+        <Style x:Key="DataBaseDataGrid" TargetType="DataGrid">
 
             <Setter Property="Background" Value="#1a1a1a"/>
+            <Setter Property="ItemsSource" Value="{Binding Professors, ElementName=DBModel}"/>
+            <Setter Property="GridView.ColumnCollection" Value="{Binding GetColumnNamesForGrid}"/>
+            <Setter Property="IsReadOnly" Value="True"/>
 
         </Style>
-        
+
+        <Style x:Key="ComboBoxSearch" TargetType="ComboBox">
+
+            <Setter Property="SelectedIndex" Value="0"/>
+            <Setter Property="Foreground" Value="#1a1a1a"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+
+        </Style>
+
+        <Style x:Key="UsualLabel" TargetType="Label">
+
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+
+        </Style>
+
     </Window.Resources>
     
     <Grid>
@@ -116,10 +143,18 @@
                 HorizontalAlignment="Right"
                 >
 
+                <ComboBox
+                    
+                    x:Name="SearchedColumn"
+                    Style="{StaticResource ComboBoxSearch}"
+                    ItemsSource="{Binding GetColumnsNames}"
+                    />
+
                 <TextBox 
                     
                     x:Name="inputSearch"
                     Style="{StaticResource UsualTextBox}"
+                    MinWidth="180"
                     
                     />
 
@@ -135,46 +170,162 @@
         </Grid>
 
         <Grid 
-            
             Grid.Row="3"
             Background="#1a1a1a"
-            
             >
 
-            <StackPanel
+            <StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+
+                        <Label 
+                            Content="ID:"
+                            Style="{StaticResource UsualLabel}"
+                            />
+
+                        <TextBox 
+                            x:Name="unpitID"
+                            Style="{StaticResource UsualTextBox}"
+                            MinWidth="60"
+                            />
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+
+                        <Label 
+                            Content="First Name:"
+                            Style="{StaticResource UsualLabel}"
+                            />
+
+                        <TextBox 
+                            x:Name="inputFName"
+                            Style="{StaticResource UsualTextBox}"
+                            MinWidth="120"
+                            />
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+
+                        <Label 
+                            Content="Second Name:"
+                            Style="{StaticResource UsualLabel}"
+                            />
+
+                        <TextBox 
+                            x:Name="inputSName"
+                            Style="{StaticResource UsualTextBox}"
+                            MinWidth="160"
+                            />
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+
+                        <Label 
+                            Content="Age:"
+                            Style="{StaticResource UsualLabel}"
+                            />
+
+                        <TextBox 
+                            x:Name="inputAge"
+                            Style="{StaticResource UsualTextBox}"
+                            MinWidth="60"
+                            />
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+
+                        <Label 
+                            Content="Sex:"
+                            Style="{StaticResource UsualLabel}"
+                            />
+
+                        <ComboBox 
+                            x:Name="inputSex"  
+                            Style="{StaticResource ComboBoxSearch}"
+                            SelectedValue="-1"
+                            Margin="0"
+                            >
+
+                            <Label Content="False"/>
+                            <Label Content="True"/>
+
+                        </ComboBox>
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+
+                        <Label 
+                            Content="Academic Degree:"
+                            Style="{StaticResource UsualLabel}"
+                            />
+
+                        <TextBox 
+                            x:Name="inputAcademicDegree"
+                            Style="{StaticResource UsualTextBox}"
+                            MinWidth="160"
+                            />
+
+                    </StackPanel>
+
+                </StackPanel>
+
+                <StackPanel
             
-                Orientation="Horizontal"
-                HorizontalAlignment="Center"
-                >
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    >
 
-                <TextBox 
-                
-                    Style="{StaticResource UsualTextBox}"
-                    />
-
-                <Button
+                    <Button
                     
-                    Style="{StaticResource UsualButton}"
-                    Content="Change Value"
-                    />
+                        Style="{StaticResource UsualButton}"
+                        Content="Update Line"
+                        />
+
+                    <Button 
+                
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource UsualButton}"
+                        Content="Delete Selected Line"
+                        Padding="5"
+                        
+                        />
+
+                </StackPanel>
+
+                <StatusBar
+            
+                    Background="#1a1a1a"
+                    VerticalAlignment="Bottom"
+                    >
+
+                    <StatusBarItem
+                
+                        x:Name="status"
+                        Foreground="#264837"
+                        FontWeight="SemiBold"
+                
+                        />
+
+                </StatusBar>
 
             </StackPanel>
-
-            <Button 
-                
-                HorizontalAlignment="Right"
-                Style="{StaticResource UsualButton}"
-                Content="Delete Selected Line"
-                
-                />
-
+            
         </Grid>
 
-        <ListView
+        <DataGrid
             
             Grid.Row="2"
-            Style="{StaticResource DataBaseListBox}"
-            />
+            Style="{StaticResource DataBaseDataGrid}"
+            >
+
+        </DataGrid>
 
     </Grid>
     
