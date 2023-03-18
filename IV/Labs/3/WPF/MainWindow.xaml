@@ -5,329 +5,247 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF"
         mc:Ignorable="d"
-        Title="Simple DB Controller" 
-        Height="450" Width="auto"
-        WindowStartupLocation="CenterScreen"
-        >
+        Title="Simple DB Controller"
+        Height="450"
+        Width="auto"
+        WindowStartupLocation="CenterScreen">
 
     <Window.DataContext>
 
-        <local:DataBaseModel x:Name="DBModel"/>
+        <local:DataBaseModel x:Name="DBModel" />
 
     </Window.DataContext>
 
     <Window.Resources>
 
-        <Style x:Key="UsualButton" TargetType="Button">
+        <Style x:Key="UsualButton"
+               TargetType="Button">
 
-            <Setter Property="Background" Value="#264837"/>
-            <Setter Property="Margin" Value="20, 10"/>
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="14"/>
-
-        </Style>
-
-        <Style x:Key="UsualTextBox" TargetType="TextBox">
-
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Background" Value="#578b61"/>
-            <Setter Property="Foreground" Value="#1a1a1a"/>
-            <Setter Property="FontWeight" Value="DemiBold"/>
-            <Setter Property="Padding" Value="5, 10"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="MinWidth" Value="150"/>
+            <Setter Property="Background"
+                    Value="#264837" />
+            <Setter Property="Margin"
+                    Value="20, 10" />
+            <Setter Property="Padding"
+                    Value="10" />
+            <Setter Property="FontWeight"
+                    Value="Bold" />
+            <Setter Property="Foreground"
+                    Value="White" />
+            <Setter Property="FontSize"
+                    Value="14" />
 
         </Style>
 
-        <Style x:Key="DataBaseDataGrid" TargetType="DataGrid">
+        <Style x:Key="UsualTextBox"
+               TargetType="TextBox">
 
-            <Setter Property="Background" Value="#1a1a1a"/>
-            <Setter Property="ItemsSource" Value="{Binding Professors, ElementName=DBModel}"/>
-            <Setter Property="GridView.ColumnCollection" Value="{Binding ColumnNamesForGrid}"/>
-            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center" />
+            <Setter Property="Background"
+                    Value="#578b61" />
+            <Setter Property="Foreground"
+                    Value="#1a1a1a" />
+            <Setter Property="FontWeight"
+                    Value="DemiBold" />
+            <Setter Property="Padding"
+                    Value="5, 10" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Left" />
+            <Setter Property="MinWidth"
+                    Value="150" />
 
         </Style>
 
-        <Style x:Key="ComboBoxSearch" TargetType="ComboBox">
+        <Style x:Key="DataBaseDataGrid"
+               TargetType="DataGrid">
 
-            <Setter Property="SelectedIndex" Value="0"/>
-            <Setter Property="Foreground" Value="#1a1a1a"/>
-            <Setter Property="Margin" Value="10"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Background"
+                    Value="#1a1a1a" />
+            <Setter Property="IsReadOnly"
+                    Value="True" />
 
         </Style>
 
-        <Style x:Key="UsualLabel" TargetType="Label">
+        <Style x:Key="ComboBoxSearch"
+               TargetType="ComboBox">
 
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontWeight" Value="Medium"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="SelectedIndex"
+                    Value="0" />
+            <Setter Property="Foreground"
+                    Value="#1a1a1a" />
+            <Setter Property="Margin"
+                    Value="10" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center" />
+            <Setter Property="FontWeight"
+                    Value="Medium" />
+
+        </Style>
+
+        <Style x:Key="UsualLabel"
+               TargetType="Label">
+
+            <Setter Property="Foreground"
+                    Value="White" />
+            <Setter Property="FontWeight"
+                    Value="Medium" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
 
         </Style>
 
     </Window.Resources>
-    
+
     <Grid>
 
         <Grid.RowDefinitions>
 
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
 
         </Grid.RowDefinitions>
 
-        <Menu
-            
-            Background="#1a1a1a"
-            >
+        <StackPanel Background="#1a1a1a">
 
-            <MenuItem 
-                
-                Header="File"
-                Background="#264837"
-                Foreground="White"
-                Padding="10,2"
-                FontWeight="Bold"
-                >
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
 
-                <MenuItem 
-                    
-                    Header="Save"
-                    Background="#438160"
-                    />
-                
-                <MenuItem 
-                    
-                    Header="Load"
-                    Background="#438160"
-                    />
+                <ComboBox x:Name="SearchedColumn"
+                          Style="{StaticResource ComboBoxSearch}"
+                          ItemsSource="{Binding ColumnsNames}" />
 
-            </MenuItem>
+                <TextBox x:Name="inputSearch"
+                         Style="{StaticResource UsualTextBox}"
+                         MinWidth="180" />
 
-        </Menu>
-
-        <Grid 
-            
-            Grid.Row="1"
-            Background="#1a1a1a" 
-            >
-
-            <Grid.ColumnDefinitions>
-
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-
-            </Grid.ColumnDefinitions>
-
-            
-            <StackPanel Orientation="Horizontal">
-
-                <Button 
-                    
-                    Content="Add new Line"
-                    Style="{StaticResource UsualButton}"
-                    
-                    />
+                <Button Content="Search"
+                        Style="{StaticResource UsualButton}" />
 
             </StackPanel>
 
-            <StackPanel 
-                
-                Grid.Column="1" 
-                Orientation="Horizontal"
-                HorizontalAlignment="Right"
-                >
+        </StackPanel>
 
-                <ComboBox
-                    
-                    x:Name="SearchedColumn"
-                    Style="{StaticResource ComboBoxSearch}"
-                    ItemsSource="{Binding ColumnsNames}"
-                    />
-
-                <TextBox 
-                    
-                    x:Name="inputSearch"
-                    Style="{StaticResource UsualTextBox}"
-                    MinWidth="180"
-                    
-                    />
-
-                <Button 
-                    
-                    Content="Search"
-                    Style="{StaticResource UsualButton}"
-                    
-                    />
-
-            </StackPanel>
-            
-        </Grid>
-
-        <Grid 
-            Grid.Row="3"
-            Background="#1a1a1a"
-            >
+        <Grid Grid.Row="3"
+              Background="#1a1a1a">
 
             <StackPanel>
 
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Center">
 
-                        <Label 
-                            Content="ID:"
-                            Style="{StaticResource UsualLabel}"
-                            />
+                        <Label Content="ID:"
+                               Style="{StaticResource UsualLabel}" />
 
-                        <TextBox 
-                            x:Name="unpitID"
-                            Style="{StaticResource UsualTextBox}"
-                            MinWidth="60"
-                            />
-
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-
-                        <Label 
-                            Content="First Name:"
-                            Style="{StaticResource UsualLabel}"
-                            />
-
-                        <TextBox 
-                            x:Name="inputFName"
-                            Style="{StaticResource UsualTextBox}"
-                            MinWidth="120"
-                            />
+                        <TextBox x:Name="inputID"
+                                 Style="{StaticResource UsualTextBox}"
+                                 MinWidth="60"
+                                 Text="0" />
 
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Center">
 
-                        <Label 
-                            Content="Second Name:"
-                            Style="{StaticResource UsualLabel}"
-                            />
+                        <Label Content="First Name:"
+                               Style="{StaticResource UsualLabel}" />
 
-                        <TextBox 
-                            x:Name="inputSName"
-                            Style="{StaticResource UsualTextBox}"
-                            MinWidth="160"
-                            />
+                        <TextBox x:Name="inputFName"
+                                 Style="{StaticResource UsualTextBox}"
+                                 MinWidth="120"
+                                 Text="Пётр" />
 
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Center">
 
-                        <Label 
-                            Content="Age:"
-                            Style="{StaticResource UsualLabel}"
-                            />
+                        <Label Content="Second Name:"
+                               Style="{StaticResource UsualLabel}" />
 
-                        <TextBox 
-                            x:Name="inputAge"
-                            Style="{StaticResource UsualTextBox}"
-                            MinWidth="60"
-                            />
+                        <TextBox x:Name="inputSName"
+                                 Style="{StaticResource UsualTextBox}"
+                                 MinWidth="160"
+                                 Text="Степанов" />
 
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Center">
 
-                        <Label 
-                            Content="Sex:"
-                            Style="{StaticResource UsualLabel}"
-                            />
+                        <Label Content="Age:"
+                               Style="{StaticResource UsualLabel}" />
 
-                        <ComboBox 
-                            x:Name="inputSex"  
-                            Style="{StaticResource ComboBoxSearch}"
-                            SelectedValue="-1"
-                            Margin="0"
-                            >
+                        <TextBox x:Name="inputAge"
+                                 Style="{StaticResource UsualTextBox}"
+                                 MinWidth="60"
+                                 Text="32" />
 
-                            <Label Content="False"/>
-                            <Label Content="True"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Center">
+
+                        <Label Content="Sex:"
+                               Style="{StaticResource UsualLabel}" />
+
+                        <ComboBox x:Name="inputSex"
+                                  Style="{StaticResource ComboBoxSearch}"
+                                  SelectedValue="-1"
+                                  Margin="0">
+
+                            <Label Content="False" />
+                            <Label Content="True" />
 
                         </ComboBox>
 
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                </StackPanel>
 
-                        <Label 
-                            Content="Academic Degree:"
-                            Style="{StaticResource UsualLabel}"
-                            />
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
 
-                        <TextBox 
-                            x:Name="inputAcademicDegree"
-                            Style="{StaticResource UsualTextBox}"
-                            MinWidth="160"
-                            />
+                    <Button Content="Add new Line"
+                            Style="{StaticResource UsualButton}"
+                            Click="AddNewLine_Click" />
 
-                    </StackPanel>
+                    <Button Style="{StaticResource UsualButton}"
+                            Content="Update Line" />
+
+                    <Button HorizontalAlignment="Right"
+                            Style="{StaticResource UsualButton}"
+                            Content="Delete Selected Line"
+                            Padding="5" />
 
                 </StackPanel>
 
-                <StackPanel
-            
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    >
+                <StatusBar Background="#1a1a1a"
+                           VerticalAlignment="Bottom">
 
-                    <Button
-                    
-                        Style="{StaticResource UsualButton}"
-                        Content="Update Line"
-                        />
-
-                    <Button 
-                
-                        HorizontalAlignment="Right"
-                        Style="{StaticResource UsualButton}"
-                        Content="Delete Selected Line"
-                        Padding="5"
-                        
-                        />
-
-                </StackPanel>
-
-                <StatusBar
-            
-                    Background="#1a1a1a"
-                    VerticalAlignment="Bottom"
-                    >
-
-                    <StatusBarItem
-                
-                        x:Name="status"
-                        Foreground="#264837"
-                        FontWeight="SemiBold"
-                
-                        />
+                    <StatusBarItem x:Name="status"
+                                   Foreground="#264837"
+                                   FontWeight="SemiBold" />
 
                 </StatusBar>
 
             </StackPanel>
-            
+
         </Grid>
 
-        <DataGrid
-            
-            Grid.Row="2"
-            Style="{StaticResource DataBaseDataGrid}"
-            >
-
-        </DataGrid>
+        <DataGrid x:Name="data"
+                  Grid.Row="2"
+                  ItemsSource="{Binding Professors, Mode=OneWay}"
+                  GridView.ColumnCollection="{Binding ColumnNamesForGrid}"
+                  Style="{StaticResource DataBaseDataGrid}"
+                  SelectionChanged="DB_SelectionChanged" />
 
     </Grid>
-    
+
 </Window>
