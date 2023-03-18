@@ -46,7 +46,7 @@
 
             <Setter Property="Background" Value="#1a1a1a"/>
             <Setter Property="ItemsSource" Value="{Binding Professors, ElementName=DBModel}"/>
-            <Setter Property="GridView.ColumnCollection" Value="{Binding GetColumnNamesForGrid}"/>
+            <Setter Property="GridView.ColumnCollection" Value="{Binding ColumnNamesForGrid}"/>
             <Setter Property="IsReadOnly" Value="True"/>
 
         </Style>
@@ -125,6 +125,7 @@
 
             </Grid.ColumnDefinitions>
 
+            
             <StackPanel Orientation="Horizontal">
 
                 <Button 
@@ -147,7 +148,7 @@
                     
                     x:Name="SearchedColumn"
                     Style="{StaticResource ComboBoxSearch}"
-                    ItemsSource="{Binding GetColumnsNames}"
+                    ItemsSource="{Binding ColumnsNames}"
                     />
 
                 <TextBox 
