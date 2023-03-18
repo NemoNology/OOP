@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,7 +15,7 @@ namespace WPF
         public string UserID { get; set; } = "postgres";
         public string Password { get; set; } = "123";
         public string DatabaseName { get; set; } = "postgres";
-        public ObservableCollection<Professor> Professors { get; private set; } = new ObservableCollection<Professor>();
+        public ObservableCollection<Professor> Professors { get; } new ObservableCollection<Professor>();
 
         private NpgsqlConnection? _connection;
 
@@ -129,11 +130,11 @@ namespace WPF
 
             if (er.HasRows)
             {
-                Professors.Clear();
+                _professors.Clear();
 
                 while (er.Read())
                 {
-                    Professors.Add(
+                    _professors.Add(
                         new Professor(
                             er.GetInt32(0),
                             er.GetString(1),
@@ -151,7 +152,7 @@ namespace WPF
         {
             Command($"DELETE FROM Professors * WHERE \"ID\" = {id};");
 
-            Professors.Remove(Professors.First(x => x.ID == id));
+            _professors.Remove(_professors.First(x => x.ID == id));
         }
 
         public void UpdateLine(int id, int newID, string newFirstName, string newSecondName, short newAge, bool newSex)
@@ -180,6 +181,11 @@ namespace WPF
             command.ExecuteNonQuery();
 
             UpdateProfessors();
+        }
+
+        public void Dispose()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
