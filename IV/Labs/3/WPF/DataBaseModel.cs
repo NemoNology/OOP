@@ -119,7 +119,7 @@ namespace WPF
 
         public void UpdateProfessors()
         {
-            var command = Command("SELECT * FROM professor ORDER BY \"ID\";");
+            var command = Command("SELECT * FROM professor ORDER BY ID;");
             var er = command.ExecuteReader();
 
             if (er == null)
@@ -150,7 +150,7 @@ namespace WPF
 
         public void DeleteLine(int id)
         {
-            var command = Command($"DELETE FROM professor * WHERE \"ID\" = {id};");
+            var command = Command($"DELETE FROM professor * WHERE ID = {id};");
 
             command.ExecuteNonQuery();
 
@@ -164,12 +164,12 @@ namespace WPF
             var sex = newSex ? 1 : 0;
 
             var command = Command($"UPDATE professor " +
-                $"SET \"{columnsNames[0]}\" = {newID}, " +
-                $"SET \"{columnsNames[1]}\" = '{newFirstName}'," +
-                $"SET \"{columnsNames[2]}\" = '{newSecondName}'" +
-                $"SET \"{columnsNames[3]}\" = {newAge}," +
-                $"SET \"{columnsNames[4]}\" = '{sex}'" +
-                $"WHERE \"ID\" = {id};");
+                $"SET {columnsNames[0]} = {newID}, " +
+                $"{columnsNames[1]} = '{newFirstName}', " +
+                $"{columnsNames[2]} = '{newSecondName}', " +
+                $"{columnsNames[3]} = {newAge}, " +
+                $"{columnsNames[4]} = '{sex}' " +
+                $"WHERE ID = {id};");
 
             command.ExecuteNonQuery();
 
