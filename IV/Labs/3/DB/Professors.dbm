@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="1265,494" last-zoom="2.95" max-obj-count="4"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="1264,493" last-zoom="2.95" max-obj-count="4"
 	 default-schema="public" default-owner="postgres">
 <database name="Professor" is-template="false" allow-conns="true">
 	<comment><![CDATA[Table for proffessor]]></comment>
@@ -24,12 +24,12 @@ Small DB "Professor"]]></comment>
 ID
 ]]></comment>
 	</column>
-	<column name="First name" not-null="true">
+	<column name="FirstName" not-null="true">
 		<type name="text" length="0"/>
 		<comment><![CDATA[Имя
 First name]]></comment>
 	</column>
-	<column name="Second name" not-null="true">
+	<column name="SecondName" not-null="true">
 		<type name="text" length="0"/>
 		<comment><![CDATA[Фамилия
 Second name]]></comment>
