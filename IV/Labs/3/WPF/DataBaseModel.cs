@@ -6,6 +6,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
+// var Author = "NemoNology - Банковский А.С.";
+
 namespace WPF
 {
     class DataBaseModel

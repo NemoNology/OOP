@@ -3,6 +3,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
+// var Author = "NemoNology - Банковский А.С.";
+
 namespace WPF
 {
     /// <summary>

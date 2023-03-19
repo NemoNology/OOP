@@ -1,5 +1,7 @@
 ﻿using System;
 
+// var Author = "NemoNology - Банковский А.С.";
+
 namespace WPF
 {
     class Professor
