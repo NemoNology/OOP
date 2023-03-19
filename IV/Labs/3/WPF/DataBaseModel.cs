@@ -117,9 +117,11 @@ namespace WPF
             }
         }
 
-        public void UpdateProfessors()
+        public void UpdateProfessors(string columnName = "ID", bool IsDecrease = false)
         {
-            var command = Command("SELECT * FROM professor ORDER BY ID;");
+            string sortType = IsDecrease ? "DESC" : string.Empty; 
+
+            var command = Command($"SELECT * FROM professor ORDER BY {columnName} {sortType};");
             var er = command.ExecuteReader();
 
             if (er == null)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 
 namespace WPF
 {
@@ -16,7 +17,7 @@ namespace WPF
             RefreshID();
         }
 
-        DataBaseModel _db = new DataBaseModel();
+        private DataBaseModel _db = new DataBaseModel();
 
         private void AddNewLine_Click(object sender, RoutedEventArgs e)
         {
@@ -87,7 +88,21 @@ namespace WPF
             RefreshID();
         }
 
-        
+        private void Search_Click(object sender, MouseEventArgs e)
+        {
+            if (SearchedColumn.SelectedIndex < 0)
+            {
+                status.Content = "You must choose searched column";
+                return;
+            }
+
+            if (string.IsNullOrEmpty(inputSearch.Text))
+            {
+                _db.UpdateProfessors(SearchedColumn.Text, e.RightButton == MouseButtonState.Pressed);
+                data.ItemsSource = _db.Professors;
+                return;
+            }
+        }
 
 
         #region Features

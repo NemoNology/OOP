@@ -120,10 +120,12 @@
 
                 <TextBox x:Name="inputSearch"
                          Style="{StaticResource UsualTextBox}"
-                         MinWidth="180" />
+                         MinWidth="180"
+                         Text="" />
 
                 <Button Content="Search"
-                        Style="{StaticResource UsualButton}" />
+                        Style="{StaticResource UsualButton}"
+                        PreviewMouseDown="Search_Click" />
 
             </StackPanel>
 
@@ -246,7 +248,8 @@
                   ItemsSource="{Binding Professors, Mode=OneWay}"
                   GridView.ColumnCollection="{Binding ColumnNamesForGrid}"
                   Style="{StaticResource DataBaseDataGrid}"
-                  SelectionChanged="DB_SelectionChanged" />
+                  SelectionChanged="DB_SelectionChanged"
+                  CanUserSortColumns="False" />
 
     </Grid>
 
