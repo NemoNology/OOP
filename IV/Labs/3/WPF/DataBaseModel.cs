@@ -47,7 +47,7 @@ namespace WPF
             }
         }
 
-        public NpgsqlCommand Command(string postgressSQLCommand, bool NeedToKeepOpenConnection = false)
+        public NpgsqlCommand Command(string postgressSQLCommand, bool NeedToCloseConnection = false)
         {
             NpgsqlCommand command = new NpgsqlCommand();
 
@@ -59,7 +59,7 @@ namespace WPF
             command.Connection = Connection;
             command.CommandText = postgressSQLCommand;
 
-            if (NeedToKeepOpenConnection)
+            if (NeedToCloseConnection)
             {
                 Connection.Close();
             }
@@ -187,9 +187,40 @@ namespace WPF
             UpdateProfessors();
         }
 
-        public void Dispose()
+        public int SearchValue(string columnName, string searcedValue)
         {
-            throw new System.NotImplementedException();
+            var command = Command($"SELECT * FROM professor " +
+                $"WHERE {columnName} = '{searcedValue}';");
+
+            Professors.Clear();
+
+            var er = command.ExecuteReader();
+
+            if (er == null)
+            {
+                Connection.Close();
+                return 0;
+            }
+
+            if (er.HasRows)
+            {
+                while (er.Read())
+                {
+                    Professors.Add(
+                        new Professor(
+                            er.GetInt32(0),
+                            er.GetString(1),
+                            er.GetString(2),
+                            er.GetInt16(3),
+                            er.GetBoolean(4)
+                            ));
+                }
+            }
+
+            Connection.Close();
+
+            return Professors.Count;
         }
+
     }
 }

@@ -102,6 +102,18 @@ namespace WPF
                 data.ItemsSource = _db.Professors;
                 return;
             }
+
+            try
+            {
+                int foundRows = _db.SearchValue(SearchedColumn.Text, inputSearch.Text);
+
+                data.ItemsSource = _db.Professors;
+                status.Content = $"Found Rows Amount: {foundRows}";
+            }
+            catch (Exception exc)
+            {
+                status.Content = exc.Message;
+            }
         }
 
 
@@ -171,6 +183,7 @@ namespace WPF
             inputFName.Text = chosenProfessor.FirstName;
             inputSName.Text = chosenProfessor.SecondtName;
             inputAge.Text = chosenProfessor.Age.ToString();
+            inputSex.SelectedIndex = chosenProfessor.Sex ? 1 : 0;
         }
 
         private void RefreshID()
