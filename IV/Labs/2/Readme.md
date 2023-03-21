@@ -5,7 +5,7 @@
 [Сайт для проверки регулярных выражений](https://regex101.com/)
 ##
 ## UML-диаграмма:
-![image](https://user-images.githubusercontent.com/91414886/226543024-440da779-2133-4df7-a2e1-46e2a30c1c0f.png)
+![image](https://user-images.githubusercontent.com/91414886/226543887-8f4a7570-2d5c-40d4-8044-6d600831c2d8.png)
 ##
 ## Полное задание:
 ![image](https://user-images.githubusercontent.com/91414886/213411918-132416d5-bd39-42e1-bba9-19f755991ae6.png)  
