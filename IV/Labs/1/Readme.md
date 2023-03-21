@@ -4,7 +4,7 @@
 [Создание диаграмм из plain text](https://plantuml.com/ru/)
 ##
 ## Задание 6: UML-диаграмма всего приложения:
-![image](https://user-images.githubusercontent.com/91414886/220989333-339d190f-0341-463c-8261-1f5a24df45c2.png)
+![image](https://user-images.githubusercontent.com/91414886/226533849-2fb5db91-98ca-4074-aa79-306c57b444e0.png)
 ##
 ## Полное задание:
 ![image](https://user-images.githubusercontent.com/91414886/213414153-6642c45d-8c26-496e-a10e-3ce315ac376d.png)  
