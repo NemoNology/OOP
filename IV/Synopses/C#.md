@@ -17,6 +17,8 @@ C# в отличие от C++ не поддерживает множествен
 Исполняющей средой для языков разработки приложений для платформы .NET & .NET Core является
 [CLR](https://ru.wikipedia.org/wiki/Common_Language_Runtime)
 
+Последняя версия C#: 11
+
 ## Источники
 
 + https://ru.wikipedia.org/wiki/C_Sharp
