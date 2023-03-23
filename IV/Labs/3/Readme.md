@@ -4,6 +4,9 @@
 [Пример на Qt](https://github.com/VetrovSV/OOP/tree/master/examples/Qt/database)  
 [DataGrid и BindingList в C#](https://github.com/VetrovSV/OOP/tree/master/examples/WpfApp_DataGrid)
 ##
+## UML-диаграмма
+![image](https://user-images.githubusercontent.com/91414886/227146605-1106abc6-5c63-42a2-85bb-16b89ff1b7b5.png)
+##
 ## Полное задание:
 ![image](https://user-images.githubusercontent.com/91414886/213412820-f38a262b-4949-4381-9010-c7dcf8c28bfc.png)  
 ![image](https://user-images.githubusercontent.com/91414886/213412882-e26a982e-db69-4c01-9ad0-604069d1e99c.png)
