@@ -183,7 +183,7 @@ namespace WPF
 
             inputID.Text = chosenProfessor.ID.ToString();
             inputFName.Text = chosenProfessor.FirstName;
-            inputSName.Text = chosenProfessor.SecondtName;
+            inputSName.Text = chosenProfessor.SecondName;
             inputAge.Text = chosenProfessor.Age.ToString();
             inputSex.SelectedIndex = chosenProfessor.Sex ? 1 : 0;
         }

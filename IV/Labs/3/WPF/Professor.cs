@@ -10,7 +10,6 @@ namespace WPF
         private string _firstName;
         private string _secondName;
         private short _age;
-        private string _academicDegree;
 
         public int ID
         {
@@ -34,13 +33,13 @@ namespace WPF
                 _firstName = value;
             }
         }
-        public string SecondtName
+        public string SecondName
         {
             get { return _secondName; }
             set
             {
                 if (string.IsNullOrEmpty(value))
-                    throw new ArgumentNullException(nameof(SecondtName));
+                    throw new ArgumentNullException(nameof(SecondName));
 
                 _secondName = value;
             }
@@ -64,7 +63,7 @@ namespace WPF
         {
             ID = iD;
             FirstName = firstName;
-            SecondtName = secondtName;
+            SecondName = secondtName;
             Age = age;
             Sex = sex;
         }
