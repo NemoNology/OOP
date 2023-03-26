@@ -21,6 +21,9 @@ namespace WPF
 
         private DataBaseModel _db = new DataBaseModel();
 
+        /// <summary>
+        /// Click on Add New Line button
+        /// </summary>
         private void AddNewLine_Click(object sender, RoutedEventArgs e)
         {
             if (!IsValidInput)
@@ -47,6 +50,9 @@ namespace WPF
             RefreshID();
         }
 
+        /// <summary>
+        /// Click on Delete Selected Line button
+        /// </summary>
         private void DeleteSelectedLine_Click(object sender, RoutedEventArgs e)
         {
             if (data.Items.Count == 0 || data.SelectedIndex < 0)
@@ -66,6 +72,9 @@ namespace WPF
             RefreshID();
         }
 
+        /// <summary>
+        /// Click on Update Selected Line button
+        /// </summary>
         private void UpdateLine_Click(object sender, RoutedEventArgs e)
         {
             if (!IsValidInput || data.SelectedIndex < 0)
@@ -90,21 +99,31 @@ namespace WPF
             RefreshID();
         }
 
+        /// <summary>
+        /// Click on Search button
+        /// </summary>
         private void Search_Click(object sender, MouseEventArgs e)
         {
+            // If user don't choose any column by which user will sort the DB,
+            // just warning him
             if (SearchedColumn.SelectedIndex < 0)
             {
                 status.Content = "You must choose searched column";
                 return;
             }
 
+            // if user don't search anything particular, than we just sort data by user chosen column
             if (string.IsNullOrEmpty(inputSearch.Text))
             {
+                // Also we check user mouse button click:
+                // Left click - ascending search
+                // Right click - descending search 
                 _db.UpdateProfessors(SearchedColumn.Text, e.RightButton == MouseButtonState.Pressed);
                 data.ItemsSource = _db.Professors;
                 return;
             }
 
+            // If user search something, that trying to find
             try
             {
                 int foundRows = _db.SearchValue(SearchedColumn.Text, inputSearch.Text);
@@ -121,6 +140,7 @@ namespace WPF
 
         #region Features
 
+        /// <value> Return true, if info inputs are valid <br/> False - otherwise </value>
         private bool IsValidInput
         {
             get
@@ -150,7 +170,7 @@ namespace WPF
 
                 if (inputSex.SelectedIndex != 0 && inputSex.SelectedIndex != 1)
                 {
-                    status.Content = "Sex must be choosen";
+                    status.Content = "Sex must be chosen";
                     return false;
                 }
 
@@ -158,6 +178,13 @@ namespace WPF
             }
         }
 
+        /// <summary>
+        /// Check every existing ID-s
+        /// </summary>
+        /// <param name="id"> ID that is checked </param>
+        /// <param name="IsCountSelectedID"> If true: check selected ID too </param>
+        /// <param name="selectedID"> If IsCountSelectedID true, that we need to know what's ID we need to check too </param>
+        /// <returns> True - if ID is unique <br/> False - otherwise </returns>
         private bool IsIDUnique(int id, bool IsCountSelectedID = false, int selectedID = 0)
         {
             foreach (var item in _db.Professors)
@@ -172,6 +199,9 @@ namespace WPF
             return true;
         }
 
+        /// <summary>
+        /// Refresh inputs data, if was selected new professor
+        /// </summary>
         private void DB_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (data.SelectedIndex == -1)
@@ -188,6 +218,9 @@ namespace WPF
             inputSex.SelectedIndex = chosenProfessor.Sex ? 1 : 0;
         }
 
+        /// <summary>
+        /// Refresh inputs ID by max ID + 1
+        /// </summary>
         private void RefreshID()
         {
             if (_db.Professors.Count != 0)

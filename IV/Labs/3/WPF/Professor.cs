@@ -50,7 +50,7 @@ namespace WPF
         public short Age
         {
             get => _age;
-            
+
             set
             {
                 if (value < 0)
