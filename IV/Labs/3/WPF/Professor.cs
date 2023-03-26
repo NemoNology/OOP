@@ -13,7 +13,8 @@ namespace WPF
 
         public int ID
         {
-            get { return _id; }
+            get => _id;
+
             set
             {
                 if (value < 0)
@@ -24,7 +25,8 @@ namespace WPF
         }
         public string FirstName
         {
-            get { return _firstName; }
+            get => _firstName;
+
             set
             {
                 if (string.IsNullOrEmpty(value))
@@ -35,7 +37,8 @@ namespace WPF
         }
         public string SecondName
         {
-            get { return _secondName; }
+            get => _secondName;
+
             set
             {
                 if (string.IsNullOrEmpty(value))
@@ -46,7 +49,8 @@ namespace WPF
         }
         public short Age
         {
-            get { return _age; }
+            get => _age;
+            
             set
             {
                 if (value < 0)
@@ -58,12 +62,12 @@ namespace WPF
         public bool Sex { get; set; }
 
         public Professor(int iD, string firstName,
-            string secondtName, short age,
+            string secondName, short age,
             bool sex)
         {
             ID = iD;
             FirstName = firstName;
-            SecondName = secondtName;
+            SecondName = secondName;
             Age = age;
             Sex = sex;
         }
