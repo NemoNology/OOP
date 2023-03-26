@@ -31,7 +31,7 @@ namespace MyNameSpace
 		public int Prop2 { get; set; }
 		public double Prop3 { get; set; }
 		
-		public int SumIntegers(int a, int b) => return a + b;
+		public int SumIntegers(int a, int b) => a + b;
 	}
 }
 
