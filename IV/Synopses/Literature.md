@@ -50,3 +50,7 @@
 	+ Concurrent Programming on Windows - _Joe Duffy_
 	+ Паттерны проектирования на платформе .NET - _Сергей Тепляков_
 	+ Архитектура платформы .NET - _Станислав Сидристый_
+
+
+## Мои скачанные книжки:
+![image](https://user-images.githubusercontent.com/91414886/227810170-a59b3140-5713-446f-8b1e-a0a8c9429322.png)
