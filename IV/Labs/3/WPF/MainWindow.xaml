@@ -116,16 +116,18 @@
 
                 <ComboBox x:Name="SearchedColumn"
                           Style="{StaticResource ComboBoxSearch}"
-                          ItemsSource="{Binding ColumnsNames}" />
+                          ItemsSource="{Binding ColumnsNames}" 
+                          ToolTip="" />
 
                 <TextBox x:Name="inputSearch"
                          Style="{StaticResource UsualTextBox}"
                          MinWidth="180"
-                         Text="" />
+                         Text="Column by which data search" />
 
                 <Button Content="Search"
                         Style="{StaticResource UsualButton}"
-                        PreviewMouseDown="Search_Click" />
+                        PreviewMouseDown="Search_Click" 
+                        ToolTip="Left Click - ascending search &#10;Right Click - descending search" />
 
             </StackPanel>
 
@@ -200,7 +202,8 @@
                         <ComboBox x:Name="inputSex"
                                   Style="{StaticResource ComboBoxSearch}"
                                   SelectedValue="-1"
-                                  Margin="0">
+                                  Margin="0"
+                                  ToolTip="False - Male; True - Female" >
 
                             <Label Content="False" />
                             <Label Content="True" />
@@ -249,7 +252,8 @@
                   GridView.ColumnCollection="{Binding ColumnNamesForGrid}"
                   Style="{StaticResource DataBaseDataGrid}"
                   SelectionChanged="DB_SelectionChanged"
-                  CanUserSortColumns="False" />
+                  CanUserSortColumns="False" 
+                  ToolTip="Sex: False - Male; True - Female" />
 
     </Grid>
 
