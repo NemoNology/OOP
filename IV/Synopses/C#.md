@@ -167,7 +167,7 @@ C# в отличие от C++ не поддерживает множествен
         
         public Dog GiveBirth(string bornName)
         {
-            return new Dog(bornName, Address);
+            return new Dog(bornName, _address);
         }
     }
     ```
