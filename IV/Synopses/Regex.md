@@ -60,7 +60,7 @@ string reg = @"Регулярное выражение";
 
 `RegexOptions opt = RegexOptions.IgnoreCase | RegexOptions.Multiline;`
 
-### **Примеры**
+### **Примеры C#**
 
 Поиск будет в одной строке data (См. ниже)
 
@@ -269,4 +269,6 @@ string data =
     Советского Союза.
     """;
 ```
+
+### **Примеры Notepad++**
 
