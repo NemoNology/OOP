@@ -64,11 +64,11 @@ namespace WPF
         }
 
         /// <summary>
-        /// Forming new PostgreSQLcommand with already established connection 
+        /// Forming new PostgreSQL command
         /// </summary>
         /// <param name="postgreSQLCommand"> String, that contains PostgreSQL command </param>
         /// <param name="NeedToCloseConnection"> Chose for close/keep open connection </param>
-        /// <returns></returns>
+        /// <returns> Formed PostgreSQLcommand with already established connection </returns>
         public NpgsqlCommand Command(string postgreSQLCommand, bool NeedToCloseConnection = false)
         {
             NpgsqlCommand command = new NpgsqlCommand();
