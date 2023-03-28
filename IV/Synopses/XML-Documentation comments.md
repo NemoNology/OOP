@@ -32,6 +32,88 @@ public class MyClass {}
 * Однострочный разделитель `///`: в примерах документации и шаблонах проектов C# используется эта форма. Если после разделителя указан пробел, он не включается в выходные данные XML.
 * Многострочные разделители `/** */`: разделители `/** */` <br/> [*Подробнее об правилах форматирования многострочных разделителей*](https://learn.microsoft.com/ru-ru/dotnet/csharp/language-reference/xmldoc/)
 
-## Примеры
+## Основные XML-теги
+* Описание объекта
+  ```C#
+  /// <summary> 
+  /// Описание документрируемого объекта
+  /// </summary>
+  ```
+* Возвращаемое значение метода либо свойства - _Данный тег находится не в теге `<summary>`_
+  ```C#
+  /// <returns> // Метод
+  /// Описание возвращаемого значения
+  /// </returns>
+  // ...
+  // ...
+  /// <value> // Свойство
+  /// Описание возвращаемого значения свойством
+  /// </value>
+  
+  // Пример:
+  /// <value>
+  /// Every edge in n-gonal pyramid
+  /// </value>
+  public List<Tuple<Vector3, Vector3>> Edges
+  {
+    get { // ... }
+  }
+  ```
+* Входной параметр метода
+  ```C#
+  /// <summary>
+  /// Check if inputted point is inside the ngonal pyramid by inputted axis
+  /// </summary>
+  /// <param name="point"> Inputted point </param>
+  /// <param name="axis"> 0 - X <br/> 1 - Y <br/> 2 - Z </param> // <br/> - перенос строки
+  /// <returns> True - if point is inside <br/> False - otherwise </returns>
+  public bool IsPointIsInsideByAxis(Vector3 point, byte axis)
+  {
+    // ...
+    // ...
+  }
+  ```
+* "Цитирование" кода - строка(и) кода
+  ```C#
+  /// <c> Строка кода </c>
+  /// <code>
+  /// Строки кода
+  /// Строки кода
+  /// Строки кода
+  /// </code>
+  ```
+Используя данный тег можно избежать проблемы с некоторым вводом. Например, в этом теге учитываются пробелы, когда в `<summary>` пробелы в начале и конце строки удаляются, а также интервал между словами - всегда один пробел, сколько бы программист их не написал
+* Пример использования документируемого объекта
+  ```C#
+  /// <example>
+  /// <code>
+  /// int b = 2;
+  /// int c = 6;
+  /// var a = MethodSumIntegers(b, c);
+  /// // a = b + c = 2 + 6 = 8
+  /// </code>
+  /// </example>
+  ```
+* Типы исключений, которые может вызвать документируемый объект
+  ```C#
+  /// <exception cref="_Класс_Исключения_"/>
+  /// <exception cref="ArgumentNullException"/>
+  /// ...
+  /// <exception cref="ArgumentOutOfRangeException"/>
+  ``` 
 
-`TODO: ScreenShots with examples`
+## Примеры
+* Обыденное описание метода/структуры/поля и т.д.  
+![image](https://user-images.githubusercontent.com/91414886/228091178-d1b9e84c-0d68-4087-a524-1a3cf9bd7c4f.png)
+* Улучшенный предыдущий пример с использованием переноса строк (`<br/>`)  
+![image](https://user-images.githubusercontent.com/91414886/228091301-0b4af32f-2172-4f2e-a82a-a6b6ef1a14a1.png)
+* Описание входного параметра функции  
+![image](https://user-images.githubusercontent.com/91414886/228092440-129cd752-5b0e-4fc2-ae9d-a07d7a7039a0.png)
+* Возвращаемое значение  
+![image](https://user-images.githubusercontent.com/91414886/228095619-2d6414fe-4a89-4df7-bc05-bcd23a6fd25c.png)
+* Цитирование кода  
+![image](https://user-images.githubusercontent.com/91414886/228095784-c00b4106-65f9-46d8-9025-52a108315897.png)
+* Пример - _к сожалению, IntelliSense не показала то, что должна была :(_  
+![image](https://user-images.githubusercontent.com/91414886/228098292-6dadf23e-c673-4619-97d9-49636227cc6c.png)
+* Возможные исключения  
+![image](https://user-images.githubusercontent.com/91414886/228096268-adbb433f-0855-4cac-b78e-6496e738aab3.png)
