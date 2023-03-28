@@ -1,5 +1,7 @@
 # Dictionary - Словарь
 
+[Краткий экскурс по словарям в C#](https://metanit.com/sharp/tutorial/4.9.php)
+
 Тип данных Словарь в языке C# является обыденным словарём: есть ключ и значение по этому ключу. Ключ обязан быть уникальным.
 
 Данный тип данных содержится в библиотеке `System.Collections.Generic`.
@@ -47,4 +49,72 @@ Console.WriteLine($"{stringNumbers["Two"]}");
 // Console out
 // Two
 // 2
+
+// Перебор словаря
+foreach (var number in numbers)
+{
+    Console.WriteLine($"{number.Key}: {number.Value}");
+}
+
+// Console out
+// 1: One
+// 2: Two
+// 3: Three
+// 10: Ten
+
+
+// Очистка словаря
+numbers.Clear();
+
+foreach (var number in numbers)
+{
+    Console.WriteLine($"{number.Key}: {number.Value}");
+}
+
+// Console out
+// 
+
+// Проверка наличия ключа методом ContainsKey
+if (!numbers.ContainsKey(10))
+{
+    numbers.Add(10, "Ten");
+}
+
+foreach (var number in numbers)
+{
+    Console.WriteLine($"{number.Key}: {number.Value}");
+}
+
+// Console out
+// 10: Ten
+
+string searchedValue = "Ten";
+
+// Проверка наличия значения методом ContainsValue
+if (numbers.ContainsValue(searchedValue))
+{
+    int key = 0;
+
+    foreach (var number in numbers)
+    {
+        Console.WriteLine($"{number.Key}: {number.Value}");
+
+        if (number.Value == searchedValue)
+        {
+            key = number.Key;
+            return;
+        }
+    }
+
+    // Удаление строки данных в словаре по ключу методом Remove
+    numbers.Remove(key);
+}
+
+foreach (var number in numbers)
+{
+    Console.WriteLine($"{number.Key}: {number.Value}");
+}
+
+// Console out
+//
 ```
