@@ -1,6 +1,8 @@
 # XML-Documentation comments C# - Комментарии XML-Документации C#
 
-[Источник информации](https://learn.microsoft.com/ru-ru/dotnet/csharp/language-reference/xmldoc/)
+[Источник информации](https://learn.microsoft.com/ru-ru/dotnet/csharp/language-reference/xmldoc/)  
+[Примеры](https://learn.microsoft.com/en-sg/dotnet/csharp/language-reference/xmldoc/recommended-tags#example)
+[Большой пример](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/xmldoc/examples)
 
 В исходных файлах C# могут находиться структурированные комментарии, используемые для создания документации по API для типов, определенных в этих файлах. Компилятор C# создает файл XML, содержащий структурированные данные, представляющие комментарии и сигнатуры API. Другие средства могут обрабатывать эти выходные данные в формате XML и создавать удобочитаемую документацию, например, в виде веб-страниц или PDF-файлов.
 
